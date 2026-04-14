@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dc6dvql1kysa8"]
+
+[ext_resource type="PackedScene" uid="uid://dl3guhty12atl" path="res://assets/Jogador/Player.tscn" id="1_xop41"]
+
+[node name="CenaFodase" type="Node2D" unique_id=1770590118]
+
+[node name="CharacterBody2D" parent="." unique_id=527051746 instance=ExtResource("1_xop41")]
