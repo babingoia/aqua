@@ -1,7 +1,38 @@
 [gd_scene format=3 uid="uid://dc6dvql1kysa8"]
 
 [ext_resource type="PackedScene" uid="uid://dl3guhty12atl" path="res://assets/Jogador/Player.tscn" id="1_xop41"]
+[ext_resource type="PackedScene" uid="uid://ddanmnoy7w2qg" path="res://assets/outros/Camera.tscn" id="2_6s0vo"]
+[ext_resource type="PackedScene" uid="uid://cqogjht13o84q" path="res://assets/Concha/Concha.tscn" id="2_qsl14"]
 
 [node name="CenaFodase" type="Node2D" unique_id=1770590118]
 
-[node name="CharacterBody2D" parent="." unique_id=527051746 instance=ExtResource("1_xop41")]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1705784012]
+custom_minimum_size = Vector2(1280, 720)
+offset_right = 1280.0
+offset_bottom = 720.0
+scale = Vector2(4, 4)
+color = Color(0, 0, 1, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1307817849]
+offset_left = 1374.0
+offset_top = 451.0
+offset_right = 3779.0
+offset_bottom = 2425.0
+color = Color(0, 1, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1028454625]
+offset_left = 1970.0
+offset_top = 800.0
+offset_right = 3132.0
+offset_bottom = 1951.0
+color = Color(1, 1, 0, 1)
+
+[node name="Concha" parent="." unique_id=741582649 instance=ExtResource("2_qsl14")]
+
+[node name="Player" parent="." unique_id=527051746 instance=ExtResource("1_xop41")]
+position = Vector2(2069, 1474)
+up_direction = Vector2(1, -0.00025)
+
+[node name="Camera" parent="Player" unique_id=2121163238 node_paths=PackedStringArray("fixed", "drag") instance=ExtResource("2_6s0vo")]
+fixed = NodePath("..")
+drag = NodePath("../../Concha")

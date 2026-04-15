@@ -1,3 +1,3 @@
 class_name Almas extends Node
 
-@export var almas: int
+@export var total_almas: int
