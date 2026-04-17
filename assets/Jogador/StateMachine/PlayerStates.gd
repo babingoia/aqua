@@ -7,13 +7,12 @@ const WALKING: String = "Walking"
 var first_hability: String
 var second_hability: String
 var third_hability: String
-var controls: Controls = Controls.new()
+
 
 func _ready() -> void:
 	await owner.ready
 	character = owner as Player
 	
-	print(character)
 	first_hability = character.first_hability.state_name
 
 	assert(character != null,

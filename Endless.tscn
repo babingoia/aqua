@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dc6dvql1kysa8"]
 
+[ext_resource type="Script" uid="uid://c46y3whk4aitm" path="res://endless.gd" id="1_s1h8t"]
 [ext_resource type="PackedScene" uid="uid://dl3guhty12atl" path="res://assets/Jogador/Player.tscn" id="1_xop41"]
-[ext_resource type="PackedScene" uid="uid://ddanmnoy7w2qg" path="res://assets/outros/Camera.tscn" id="2_6s0vo"]
 [ext_resource type="PackedScene" uid="uid://cqogjht13o84q" path="res://assets/Concha/Concha.tscn" id="2_qsl14"]
+[ext_resource type="PackedScene" uid="uid://ddanmnoy7w2qg" path="res://assets/outros/Camera.tscn" id="4_s1h8t"]
 
 [node name="CenaFodase" type="Node2D" unique_id=1770590118]
+script = ExtResource("1_s1h8t")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1705784012]
+[node name="Limites" type="ColorRect" parent="." unique_id=1705784012]
 custom_minimum_size = Vector2(1280, 720)
 offset_right = 1280.0
 offset_bottom = 720.0
@@ -28,11 +30,16 @@ offset_bottom = 1951.0
 color = Color(1, 1, 0, 1)
 
 [node name="Concha" parent="." unique_id=741582649 instance=ExtResource("2_qsl14")]
+position = Vector2(2530, 1389)
 
 [node name="Player" parent="." unique_id=527051746 instance=ExtResource("1_xop41")]
-position = Vector2(2069, 1474)
+position = Vector2(33, 1446)
 up_direction = Vector2(1, -0.00025)
 
-[node name="Camera" parent="Player" unique_id=2121163238 node_paths=PackedStringArray("fixed", "drag") instance=ExtResource("2_6s0vo")]
-fixed = NodePath("..")
-drag = NodePath("../../Concha")
+[node name="Camera" parent="." unique_id=1529914638 instance=ExtResource("4_s1h8t")]
+limit_enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 5000
+limit_bottom = 720
+max_zoom = 5.0

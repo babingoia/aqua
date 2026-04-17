@@ -13,11 +13,11 @@ func physics_update(_delta: float) -> void:
 		finished.emit(WALKING)
 		return
 		
-	elif Input.is_action_just_pressed(controls.FIRST_HABILITY_INPUT):
+	elif Input.is_action_just_pressed(Controls.FIRST_HABILITY_INPUT):
 		hability.finish(character, _delta)
 		finished.emit(WALKING)
 		return
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	character.animation_player.play("surf")
+	super.enter(previous_state_path)

@@ -1,8 +1,9 @@
 class_name Stamina extends Node
 
+
 @export var actual_stamina: float
-var max_stamina: int
 @export var regen_rate: float
+var max_stamina: int
 
 
 func _ready() -> void:

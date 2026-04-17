@@ -1,10 +1,10 @@
 class_name HabilitySurf extends Hability
 
 @export var velocity_multiplier: float
-var controls: Controls = Controls.new()
 var is_axis_got: bool = false
 var input_direction_x: float
 var input_direction_y: float
+
 
 func _ready() -> void:
 	state_name = "Surf"
@@ -13,8 +13,8 @@ func _ready() -> void:
 
 func execute(caster: Character, delta:float) -> void:
 	if is_axis_got == false:
-		input_direction_x = Input.get_axis(controls.LEFT, controls.RIGHT)
-		input_direction_y = Input.get_axis(controls.UP, controls.DOWN)
+		input_direction_x = Input.get_axis(Controls.LEFT, Controls.RIGHT)
+		input_direction_y = Input.get_axis(Controls.UP, Controls.DOWN)
 		is_axis_got = true
 	
 	print("x:" + str(input_direction_x))

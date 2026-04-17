@@ -9,12 +9,16 @@ size = Vector2(418, 440)
 script = ExtResource("1_4sd70")
 
 [node name="Concha" type="ColorRect" parent="." unique_id=1692458658]
-offset_left = 2336.0
-offset_top = 1176.0
-offset_right = 2754.0
-offset_bottom = 1616.0
+offset_left = -210.0
+offset_top = -220.0
+offset_right = 208.0
+offset_bottom = 220.0
 color = Color(1, 0.4862745, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Concha" unique_id=603534176]
 position = Vector2(209, 220)
 shape = SubResource("RectangleShape2D_bnuy2")
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=676811357]
+position = Vector2(-93, -97)
+rect = Rect2(-10, -10, 209, 220)

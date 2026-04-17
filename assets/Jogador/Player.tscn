@@ -158,7 +158,7 @@ metadata/_custom_type_script = "uid://ca7yp78tefryh"
 
 [node name="Velocidade" type="Node" parent="." unique_id=2114549722]
 script = ExtResource("6_cmw62")
-velocidade = 100
+velocidade = 1000
 metadata/_custom_type_script = "uid://lj8mw8m4ro3y"
 
 [node name="Vida" type="Node" parent="." unique_id=762786041]
@@ -185,3 +185,7 @@ script = ExtResource("1_4td50")
 velocity_multiplier = 2.0
 cost = 30.0
 metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
+position = Vector2(25, 4)
+rect = Rect2(0, 0, 100, 100)
