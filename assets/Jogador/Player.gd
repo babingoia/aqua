@@ -12,4 +12,3 @@ func _ready() -> void:
 	almas = $Almas
 
 
-TESTANDO
