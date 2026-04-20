@@ -12,6 +12,8 @@
 [ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="7_4td50"]
 [ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="8_ajy2y"]
 [ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="9_bug2i"]
+[ext_resource type="AudioStream" uid="uid://dd3yyku3iic08" path="res://audios/Andar Areia.wav" id="13_v8djh"]
+[ext_resource type="AudioStream" uid="uid://ct4bcdpwr4gem" path="res://audios/Surf.wav" id="14_0m5cp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8djh"]
 atlas = ExtResource("2_4td50")
@@ -189,3 +191,9 @@ metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
 [node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
 position = Vector2(25, 4)
 rect = Rect2(0, 0, 100, 100)
+
+[node name="audio_andar" type="AudioStreamPlayer" parent="." unique_id=2111112951]
+stream = ExtResource("13_v8djh")
+
+[node name="audio_surf" type="AudioStreamPlayer" parent="." unique_id=1085134911]
+stream = ExtResource("14_0m5cp")

@@ -10,5 +10,3 @@ func _ready() -> void:
 	velocidade = $Velocidade
 	stamina = $Stamina
 	almas = $Almas
-
-

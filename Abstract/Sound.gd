@@ -2,6 +2,7 @@
 class_name Sound extends Node
 
 
+
 func play() -> void:
 	pass
 	
