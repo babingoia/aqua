@@ -6,7 +6,7 @@ func _ready() -> void:
 	
 	
 func physics_update(_delta: float) -> void:	
-	super.physics_update(_delta)
+	hability.execute(character, _delta)
 	
 	if character.stamina.actual_stamina < hability.cost:
 		hability.finish(character, _delta)

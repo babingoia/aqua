@@ -13,7 +13,9 @@ func _ready() -> void:
 	await owner.ready
 	character = owner as Player
 	
-	first_hability = character.first_hability.state_name
+	first_hability = character.stats.first_hability.state_name
+	second_hability = character.stats.second_hability.state_name
+	third_hability = character.stats.third_hability.state_name
 
 	assert(character != null,
 	 "O PlayerState precisa estar ligado a um Player") 

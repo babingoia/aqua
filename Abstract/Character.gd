@@ -1,7 +1,9 @@
 class_name Character extends Node
 
-@onready var vida: Vida
-@onready var velocidade: Velocidade
-@onready var stamina: Stamina
-@onready var almas: Almas
-@export var first_hability: Hability
+@export var vida: Vida
+@export var velocidade: Velocidade
+@export var stamina: Stamina
+@export var almas: Almas
+@export var first_hability: Hability = NullHability.new()
+@export var second_hability: Hability = NullHability.new()
+@export var third_hability: Hability = NullHability.new()

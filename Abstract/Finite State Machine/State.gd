@@ -19,17 +19,13 @@ func update(_delta: float) -> void:
 	
 # Chamada pela maquina de estados no tick de física
 func physics_update(_delta: float) -> void:
-	hability.execute(character, _delta)
+	pass
 
 # Chamada pela maquina de estados quando o estado é inicializado
 # pela primeira vez
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entrando no estado:" + str(get_path()))
-	animation.play()
-	sound.play()
+	pass
 	
 # Chamada pela maquina de estados antes do estado ser trocado
 func exit() -> void:
-	print("Saindo do estado:" + str(get_path()))
-	animation.stop()
-	sound.stop()
+	pass

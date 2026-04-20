@@ -23,7 +23,7 @@ func execute(caster: Character, delta:float) -> void:
 	caster.velocity.y = caster.velocidade.velocidade * input_direction_y * velocity_multiplier
 	
 	
-	caster.stamina.decresse_over_time(cost, delta)
+	caster.stamina.decreasse_over_time(cost, delta)
 	caster.move_and_slide()
 
 

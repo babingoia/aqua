@@ -17,6 +17,5 @@ func physics_update(_delta: float) -> void:
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	super.enter(previous_state_path)
 	character.animation_player.play("walking")
 	

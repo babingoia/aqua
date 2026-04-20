@@ -6,12 +6,15 @@
 [ext_resource type="Script" uid="uid://c0xbsf22mkuqm" path="res://Abstract/Finite State Machine/StateMachine.gd" id="2_5481f"]
 [ext_resource type="Script" uid="uid://c8ufbt2n340sr" path="res://assets/Jogador/StateMachine/MovementStates/Idle.gd" id="3_bsmxe"]
 [ext_resource type="Texture2D" uid="uid://8kw2dc8mygyf" path="res://spr/IMG_20260413_093448.jpg" id="3_bug2i"]
+[ext_resource type="Script" uid="uid://bda6qkq8peaoo" path="res://Abstract/Character.gd" id="4_0m5cp"]
 [ext_resource type="Script" uid="uid://d2at0ak7tkxea" path="res://assets/Jogador/StateMachine/MovementStates/Walking.gd" id="4_c51ww"]
 [ext_resource type="Script" uid="uid://ca7yp78tefryh" path="res://assets/Jogador/StateMachine/MovementStates/Surf.gd" id="6_ajy2y"]
 [ext_resource type="Script" uid="uid://lj8mw8m4ro3y" path="res://components/velocidade.gd" id="6_cmw62"]
 [ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="7_4td50"]
 [ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="8_ajy2y"]
 [ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="9_bug2i"]
+[ext_resource type="Script" uid="uid://b27ux83hqoamb" path="res://assets/Jogador/StateMachine/Ataques/AutoAttack.gd" id="13_v8djh"]
+[ext_resource type="Script" uid="uid://dvlr2d1dx8vef" path="res://Abstract/Finite State Machine/State.gd" id="15_mnfme"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8djh"]
 atlas = ExtResource("2_4td50")
@@ -126,7 +129,7 @@ _data = {
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=527051746 node_paths=PackedStringArray("first_hability")]
 script = ExtResource("1_j2hai")
-first_hability = NodePath("HabilitySurf")
+first_hability = NodePath("Stats/HabilitySurf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1103833997]
 texture_filter = 1
@@ -139,52 +142,74 @@ animation = &"idle"
 position = Vector2(76.5, 67)
 shape = SubResource("RectangleShape2D_1rk6f")
 
-[node name="StateMachine" type="Node" parent="." unique_id=306926093 node_paths=PackedStringArray("initial_state")]
-script = ExtResource("2_5481f")
-initial_state = NodePath("Idle")
-metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+[node name="Stats" type="Node" parent="." unique_id=894507401 node_paths=PackedStringArray("vida", "velocidade", "stamina", "almas", "first_hability")]
+script = ExtResource("4_0m5cp")
+vida = NodePath("Vida")
+velocidade = NodePath("Velocidade")
+stamina = NodePath("Stamina")
+almas = NodePath("Almas")
+first_hability = NodePath("HabilitySurf")
+metadata/_custom_type_script = "uid://bda6qkq8peaoo"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1659282666]
-script = ExtResource("3_bsmxe")
-metadata/_custom_type_script = "uid://c8ufbt2n340sr"
-
-[node name="Walking" type="Node" parent="StateMachine" unique_id=1972147320]
-script = ExtResource("4_c51ww")
-metadata/_custom_type_script = "uid://d2at0ak7tkxea"
-
-[node name="Surf" type="Node" parent="StateMachine" unique_id=779342086]
-script = ExtResource("6_ajy2y")
-metadata/_custom_type_script = "uid://ca7yp78tefryh"
-
-[node name="Velocidade" type="Node" parent="." unique_id=2114549722]
+[node name="Velocidade" type="Node" parent="Stats" unique_id=2114549722]
 script = ExtResource("6_cmw62")
 velocidade = 1000
 metadata/_custom_type_script = "uid://lj8mw8m4ro3y"
 
-[node name="Vida" type="Node" parent="." unique_id=762786041]
+[node name="Vida" type="Node" parent="Stats" unique_id=762786041]
 script = ExtResource("7_4td50")
 vida_maxima = 100
 metadata/_custom_type_script = "uid://c13d1l2ij0mkb"
 
-[node name="Stamina" type="Node" parent="." unique_id=199306194]
+[node name="Stamina" type="Node" parent="Stats" unique_id=199306194]
 script = ExtResource("8_ajy2y")
 actual_stamina = 100.0
 regen_rate = 10.0
 metadata/_custom_type_script = "uid://c8cg80vmv3go2"
 
-[node name="Almas" type="Node" parent="." unique_id=2076724995]
+[node name="Almas" type="Node" parent="Stats" unique_id=2076724995]
 script = ExtResource("9_bug2i")
 metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1680384423]
-libraries/ = SubResource("AnimationLibrary_ajy2y")
-
-[node name="HabilitySurf" type="Node" parent="." unique_id=166534084]
+[node name="HabilitySurf" type="Node" parent="Stats" unique_id=166534084]
 unique_name_in_owner = true
 script = ExtResource("1_4td50")
 velocity_multiplier = 2.0
 cost = 30.0
 metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
+
+[node name="MovementStateMachine" type="Node" parent="." unique_id=306926093 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_5481f")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="Idle" type="Node" parent="MovementStateMachine" unique_id=1659282666]
+script = ExtResource("3_bsmxe")
+metadata/_custom_type_script = "uid://c8ufbt2n340sr"
+
+[node name="Walking" type="Node" parent="MovementStateMachine" unique_id=1972147320]
+script = ExtResource("4_c51ww")
+metadata/_custom_type_script = "uid://d2at0ak7tkxea"
+
+[node name="Surf" type="Node" parent="MovementStateMachine" unique_id=779342086]
+script = ExtResource("6_ajy2y")
+metadata/_custom_type_script = "uid://ca7yp78tefryh"
+
+[node name="AttackStateMachine" type="Node" parent="." unique_id=588037718 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_5481f")
+initial_state = NodePath("IdleAttack")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="AutoAttackState" type="Node" parent="AttackStateMachine" unique_id=1995887275]
+script = ExtResource("13_v8djh")
+metadata/_custom_type_script = "uid://b27ux83hqoamb"
+
+[node name="IdleAttack" type="Node" parent="AttackStateMachine" unique_id=335601231]
+script = ExtResource("15_mnfme")
+metadata/_custom_type_script = "uid://dvlr2d1dx8vef"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1680384423]
+libraries/ = SubResource("AnimationLibrary_ajy2y")
 
 [node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
 position = Vector2(25, 4)

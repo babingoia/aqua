@@ -15,7 +15,7 @@ func debug(rate: float) -> void:
 	print("Stamina mudando..." + str(rate))
 
 
-func decresse_over_time(decrese_value: int, delta: float) -> void:
+func decreasse_over_time(decrese_value: int, delta: float) -> void:
 	actual_stamina -= decrese_value * delta
 
 
