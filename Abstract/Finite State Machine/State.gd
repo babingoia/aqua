@@ -1,8 +1,5 @@
 # Classe abstrata de Estado
 class_name State extends Node
-
-var animation: AnimationLogic = NullAnimationLogic.new()
-var sound: Sound = NullSound.new()
 var hability: Hability = NullHability.new()
 var character: Character
 
@@ -25,11 +22,9 @@ func physics_update(_delta: float) -> void:
 # pela primeira vez
 func enter(previous_state_path: String, data := {}) -> void:
 	print("Entrando no estado:" + str(get_path()))
-	animation.play()
-	sound.play()
+	
 	
 # Chamada pela maquina de estados antes do estado ser trocado
 func exit() -> void:
 	print("Saindo do estado:" + str(get_path()))
-	animation.stop()
-	sound.stop()
+	
