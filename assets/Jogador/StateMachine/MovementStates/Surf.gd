@@ -13,8 +13,9 @@ func physics_update(_delta: float) -> void:
 	if character.stamina.actual_stamina < hability.cost:
 		hability.finish(character, _delta)
 		finished.emit(WALKING)
-	
-	if Input.is_action_just_pressed(Controls.FIRST_HABILITY_INPUT):
+		return
+		
+	elif Input.is_action_just_pressed(Controls.FIRST_HABILITY_INPUT):
 		hability.finish(character, _delta)
 		finished.emit(WALKING)
 		return
