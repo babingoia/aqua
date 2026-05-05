@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< Updated upstream
 uid="uid://xcq5abhwtgrc"
+=======
+uid="uid://bpyf5l15gs1o4"
+>>>>>>> Stashed changes
 path="res://.godot/imported/petralhudo.png-916bfa60da0527d758e7df4987435a95.ctex"
 metadata={
 "vram_texture": false
