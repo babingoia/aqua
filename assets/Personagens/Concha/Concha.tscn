@@ -1,0 +1,219 @@
+[gd_scene format=3 uid="uid://cqogjht13o84q"]
+
+[ext_resource type="Script" uid="uid://dtilhnn5osgca" path="res://assets/Personagens/Concha/Concha.gd" id="1_4sd70"]
+[ext_resource type="Texture2D" uid="uid://cjx2nelkiw01e" path="res://spr/shell.png" id="2_qyot8"]
+[ext_resource type="Script" uid="uid://c0xbsf22mkuqm" path="res://Abstract/Finite State Machine/StateMachine.gd" id="3_k30rj"]
+[ext_resource type="Script" uid="uid://dvlr2d1dx8vef" path="res://Abstract/Finite State Machine/State.gd" id="4_2tm0m"]
+[ext_resource type="Script" uid="uid://dpn5gyq4rguoa" path="res://Utils/NullObjects/NullHability.gd" id="5_2tm0m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tiixu"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k30rj"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tm0m"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmf42"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a84w"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idkcp"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exljc"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewske"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0gj1"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oboyr"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyoc1"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_knxne"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hcd3b"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1536, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b2l7"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1664, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n25m0"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1792, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fg0t"]
+atlas = ExtResource("2_qyot8")
+region = Rect2(1920, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3f2y8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tiixu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k30rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tm0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmf42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a84w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idkcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exljc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewske")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0gj1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oboyr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyoc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_knxne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hcd3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1b2l7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n25m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5fg0t")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_qyot8"]
+resource_name = "Idle"
+length = 2.049494
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1356506, 0.26490325, 0.40110797, 0.52741534, 0.6504731, 0.77510494, 0.9044591, 1.0338134, 1.1653832, 1.2956699, 1.4225174, 1.5487236, 1.6733555, 1.805968, 1.935664),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_tiixu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k30rj"]
+_data = {
+&"Idle": SubResource("Animation_qyot8"),
+&"RESET": SubResource("Animation_tiixu")
+}
+
+[node name="Concha" type="Node2D" unique_id=741582649]
+script = ExtResource("1_4sd70")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=454902844]
+sprite_frames = SubResource("SpriteFrames_3f2y8")
+animation = &"Idle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1886211645]
+root_node = NodePath("../AnimatedSprite2D")
+libraries/ = SubResource("AnimationLibrary_k30rj")
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=676811357]
+position = Vector2(-93, -97)
+rect = Rect2(63, 36, 61, 107)
+
+[node name="StateMachine" type="Node" parent="." unique_id=29123559 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_k30rj")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1894133295 node_paths=PackedStringArray("hability", "character")]
+script = ExtResource("4_2tm0m")
+hability = NodePath("NullHability")
+character = NodePath("../..")
+metadata/_custom_type_script = "uid://dvlr2d1dx8vef"
+
+[node name="NullHability" type="Node" parent="StateMachine/Idle" unique_id=1840974293]
+script = ExtResource("5_2tm0m")
+metadata/_custom_type_script = "uid://dpn5gyq4rguoa"

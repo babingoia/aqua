@@ -7,3 +7,5 @@ class_name Character extends Node
 @export var first_hability: Hability = NullHability.new()
 @export var second_hability: Hability = NullHability.new()
 @export var third_hability: Hability = NullHability.new()
+@export var animation_player: AnimationPlayer
+@export var state_machine: StateMachine

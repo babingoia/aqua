@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://dl3guhty12atl"]
+
+[ext_resource type="Script" uid="uid://cef4hhvtdpx3a" path="res://components/habilidades/HabilitySurf.gd" id="1_4td50"]
+[ext_resource type="Script" uid="uid://kyn5isk7mtst" path="res://assets/Personagens/Jogador/Player.gd" id="1_j2hai"]
+[ext_resource type="Script" uid="uid://c0xbsf22mkuqm" path="res://Abstract/Finite State Machine/StateMachine.gd" id="2_5481f"]
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+[ext_resource type="Script" uid="uid://c8ufbt2n340sr" path="res://assets/Jogador/StateMachine/MovementStates/Idle.gd" id="3_bsmxe"]
+[ext_resource type="Texture2D" uid="uid://8kw2dc8mygyf" path="res://spr/IMG_20260413_093448.jpg" id="3_bug2i"]
+[ext_resource type="Script" uid="uid://bda6qkq8peaoo" path="res://Abstract/Character.gd" id="4_0m5cp"]
+[ext_resource type="Script" uid="uid://d2at0ak7tkxea" path="res://assets/Jogador/StateMachine/MovementStates/Walking.gd" id="4_c51ww"]
+[ext_resource type="Script" uid="uid://ca7yp78tefryh" path="res://assets/Jogador/StateMachine/MovementStates/Surf.gd" id="6_ajy2y"]
+=======
+[ext_resource type="Texture2D" uid="uid://c0c2ab4a80si1" path="res://spr/mari.png" id="2_ajy2y"]
+[ext_resource type="Script" uid="uid://c8ufbt2n340sr" path="res://assets/Personagens/Jogador/States/MovementStates/Idle.gd" id="3_bsmxe"]
+[ext_resource type="Script" uid="uid://d2at0ak7tkxea" path="res://assets/Personagens/Jogador/States/MovementStates/Walking.gd" id="4_c51ww"]
+[ext_resource type="Script" uid="uid://ca7yp78tefryh" path="res://assets/Personagens/Jogador/States/MovementStates/Surf.gd" id="6_ajy2y"]
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
+[ext_resource type="Script" uid="uid://lj8mw8m4ro3y" path="res://components/velocidade.gd" id="6_cmw62"]
+[ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="7_4td50"]
+[ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="8_ajy2y"]
+[ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="9_bug2i"]
+[ext_resource type="Script" uid="uid://b27ux83hqoamb" path="res://assets/Jogador/StateMachine/Ataques/AutoAttack.gd" id="13_v8djh"]
+[ext_resource type="Script" uid="uid://dvlr2d1dx8vef" path="res://Abstract/Finite State Machine/State.gd" id="15_mnfme"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bug2i"]
+atlas = ExtResource("2_ajy2y")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8djh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bug2i")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1rk6f"]
+size = Vector2(16, 49)
+
+[sub_resource type="Animation" id="Animation_ajy2y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_cmw62"]
+resource_name = "idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+
+[sub_resource type="Animation" id="Animation_bug2i"]
+resource_name = "surf"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"surf"]
+}
+
+[sub_resource type="Animation" id="Animation_4td50"]
+resource_name = "walking"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"moving"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ajy2y"]
+_data = {
+&"RESET": SubResource("Animation_ajy2y"),
+&"idle": SubResource("Animation_cmw62"),
+&"surf": SubResource("Animation_bug2i"),
+&"walking": SubResource("Animation_4td50")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=527051746 node_paths=PackedStringArray("movement_state_machine", "vida", "velocidade", "stamina", "almas", "first_hability", "animation_player")]
+script = ExtResource("1_j2hai")
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+first_hability = NodePath("Stats/HabilitySurf")
+=======
+movement_state_machine = NodePath("dados/MovementStateMachine")
+vida = NodePath("dados/Vida")
+velocidade = NodePath("dados/Velocidade")
+stamina = NodePath("dados/Stamina")
+almas = NodePath("dados/Almas")
+first_hability = NodePath("dados/HabilitySurf")
+animation_player = NodePath("dados/AnimationPlayer")
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1103833997]
+texture_filter = 1
+scale = Vector2(0.507, 1)
+sprite_frames = SubResource("SpriteFrames_v8djh")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1590607446]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_1rk6f")
+
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+[node name="Stats" type="Node" parent="." unique_id=894507401 node_paths=PackedStringArray("vida", "velocidade", "stamina", "almas", "first_hability")]
+script = ExtResource("4_0m5cp")
+vida = NodePath("Vida")
+velocidade = NodePath("Velocidade")
+stamina = NodePath("Stamina")
+almas = NodePath("Almas")
+first_hability = NodePath("HabilitySurf")
+metadata/_custom_type_script = "uid://bda6qkq8peaoo"
+
+[node name="Velocidade" type="Node" parent="Stats" unique_id=2114549722]
+=======
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
+position = Vector2(-99, -100)
+rect = Rect2(97, 97, 3, 3)
+
+[node name="dados" type="Node2D" parent="." unique_id=492503571]
+
+[node name="Velocidade" type="Node" parent="dados" unique_id=2114549722]
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
+script = ExtResource("6_cmw62")
+velocidade = 100
+metadata/_custom_type_script = "uid://lj8mw8m4ro3y"
+
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+[node name="Vida" type="Node" parent="Stats" unique_id=762786041]
+=======
+[node name="Vida" type="Node" parent="dados" unique_id=762786041]
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
+script = ExtResource("7_4td50")
+vida_maxima = 100
+metadata/_custom_type_script = "uid://c13d1l2ij0mkb"
+
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+[node name="Stamina" type="Node" parent="Stats" unique_id=199306194]
+=======
+[node name="Stamina" type="Node" parent="dados" unique_id=199306194]
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
+script = ExtResource("8_ajy2y")
+actual_stamina = 1000.0
+regen_rate = 10.0
+metadata/_custom_type_script = "uid://c8cg80vmv3go2"
+
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+[node name="Almas" type="Node" parent="Stats" unique_id=2076724995]
+script = ExtResource("9_bug2i")
+metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
+
+[node name="HabilitySurf" type="Node" parent="Stats" unique_id=166534084]
+=======
+[node name="Almas" type="Node" parent="dados" unique_id=2076724995]
+script = ExtResource("9_bug2i")
+metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
+
+[node name="MovementStateMachine" type="Node" parent="dados" unique_id=306926093 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_5481f")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="Idle" type="Node" parent="dados/MovementStateMachine" unique_id=1659282666]
+script = ExtResource("3_bsmxe")
+metadata/_custom_type_script = "uid://c8ufbt2n340sr"
+
+[node name="Walking" type="Node" parent="dados/MovementStateMachine" unique_id=1972147320]
+script = ExtResource("4_c51ww")
+metadata/_custom_type_script = "uid://d2at0ak7tkxea"
+
+[node name="Surf" type="Node" parent="dados/MovementStateMachine" unique_id=779342086 node_paths=PackedStringArray("hability")]
+script = ExtResource("6_ajy2y")
+hability = NodePath("../../HabilitySurf")
+metadata/_custom_type_script = "uid://ca7yp78tefryh"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="dados" unique_id=1680384423]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_ajy2y")
+
+[node name="HabilitySurf" type="Node" parent="dados" unique_id=166534084]
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
+unique_name_in_owner = true
+script = ExtResource("1_4td50")
+velocity_multiplier = 2.0
+turn_speed = 0.01
+cost = 30.0
+metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
+<<<<<<< Updated upstream:assets/Jogador/Player.tscn
+
+[node name="MovementStateMachine" type="Node" parent="." unique_id=306926093 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_5481f")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="Idle" type="Node" parent="MovementStateMachine" unique_id=1659282666]
+script = ExtResource("3_bsmxe")
+metadata/_custom_type_script = "uid://c8ufbt2n340sr"
+
+[node name="Walking" type="Node" parent="MovementStateMachine" unique_id=1972147320]
+script = ExtResource("4_c51ww")
+metadata/_custom_type_script = "uid://d2at0ak7tkxea"
+
+[node name="Surf" type="Node" parent="MovementStateMachine" unique_id=779342086]
+script = ExtResource("6_ajy2y")
+metadata/_custom_type_script = "uid://ca7yp78tefryh"
+
+[node name="AttackStateMachine" type="Node" parent="." unique_id=588037718 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_5481f")
+initial_state = NodePath("IdleAttack")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="AutoAttackState" type="Node" parent="AttackStateMachine" unique_id=1995887275]
+script = ExtResource("13_v8djh")
+metadata/_custom_type_script = "uid://b27ux83hqoamb"
+
+[node name="IdleAttack" type="Node" parent="AttackStateMachine" unique_id=335601231]
+script = ExtResource("15_mnfme")
+metadata/_custom_type_script = "uid://dvlr2d1dx8vef"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1680384423]
+libraries/ = SubResource("AnimationLibrary_ajy2y")
+
+[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
+position = Vector2(25, 4)
+rect = Rect2(0, 0, 100, 100)
+=======
+>>>>>>> Stashed changes:assets/Personagens/Jogador/Player.tscn
