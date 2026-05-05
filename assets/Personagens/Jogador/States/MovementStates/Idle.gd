@@ -1,12 +1,7 @@
 class_name Idle extends PlayerState
 
-	
-func physics_update(_delta: float) -> void:
-<<<<<<< Updated upstream:assets/Jogador/StateMachine/MovementStates/Idle.gd
-	
-=======
 
->>>>>>> Stashed changes:assets/Personagens/Jogador/States/MovementStates/Idle.gd
+func physics_update(_delta: float) -> void:
 	if Input.is_action_pressed(Controls.UP) or Input.is_action_pressed(Controls.DOWN) or Input.is_action_pressed(Controls.RIGHT) or Input.is_action_pressed(Controls.LEFT):
 		finished.emit(WALKING)
 	elif Input.is_action_pressed(Controls.FIRST_HABILITY_INPUT):
@@ -14,10 +9,7 @@ func physics_update(_delta: float) -> void:
 	
 
 func enter(previous_state_path: String, data := {}) -> void:
-<<<<<<< Updated upstream:assets/Jogador/StateMachine/MovementStates/Idle.gd
-=======
 	print("Entrando em Idle")
->>>>>>> Stashed changes:assets/Personagens/Jogador/States/MovementStates/Idle.gd
 	character.velocity.x = 0.0
 	character.animation_player.play(ANIM_IDLE)
 	

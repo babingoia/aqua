@@ -19,14 +19,8 @@ func _ready() -> void:
 	character = owner as Player
 	print(character)
 	
-<<<<<<< Updated upstream:assets/Jogador/StateMachine/PlayerStates.gd
-	first_hability = character.stats.first_hability.state_name
-	second_hability = character.stats.second_hability.state_name
-	third_hability = character.stats.third_hability.state_name
-=======
 	first_hability = character.first_hability.state_name
 	anim_first_hability = character.first_hability.anim_name
->>>>>>> Stashed changes:assets/Personagens/Jogador/States/PlayerStates.gd
 
 	assert(character != null,
 	 "O PlayerState precisa estar ligado a um Player") 
