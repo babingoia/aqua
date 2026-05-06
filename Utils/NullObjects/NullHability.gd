@@ -1,4 +1,6 @@
 class_name NullHability extends Hability
 
-func execute(caster: Character, delta: float) -> void:
-	pass
+func execute(character: Character, delta: float) -> HabilityResponse:
+	var response: HabilityResponse = HabilityResponse.new()
+	response.status = Response.FAILED
+	return response

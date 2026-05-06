@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dc6dvql1kysa8"]
 
 [ext_resource type="Script" uid="uid://c46y3whk4aitm" path="res://endless.gd" id="1_s1h8t"]
-[ext_resource type="PackedScene" uid="uid://ccov5i3c1e35s" path="res://assets/Mapa/Praia.tscn" id="2_qsl14"]
+[ext_resource type="PackedScene" uid="uid://c1jl7cwghi0xc" path="res://assets/Mapa/Praia.tscn" id="2_qsl14"]
 
 [node name="CenaFodase" type="Node2D" unique_id=1770590118]
 script = ExtResource("1_s1h8t")

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ccov5i3c1e35s"]
+[gd_scene format=3 uid="uid://c1jl7cwghi0xc"]
 
 [ext_resource type="Texture2D" uid="uid://xjplsojd8rc7" path="res://spr/praias.png" id="1_b40mp"]
 [ext_resource type="Texture2D" uid="uid://ccoejg3oa2uq2" path="res://spr/mari.png" id="2_6ffje"]
@@ -56,14 +56,14 @@ texture = ExtResource("5_fbu2e")
 z_index = 1
 y_sort_enabled = true
 
-[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
-position = Vector2(-55, 2)
-
 [node name="Pilares" type="Sprite2D" parent="Objects" unique_id=930515602]
 texture = ExtResource("6_jv64s")
 
 [node name="Pedras" type="Sprite2D" parent="Objects" unique_id=1294179302]
 texture = ExtResource("7_cns32")
+
+[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
+position = Vector2(-55, 2)
 
 [node name="Petralhudo" parent="Objects" unique_id=1039303583 instance=ExtResource("11_fbu2e")]
 position = Vector2(-106, 38)

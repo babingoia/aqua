@@ -1,10 +1,25 @@
 [gd_scene format=3 uid="uid://cqogjht13o84q"]
 
-[ext_resource type="Script" uid="uid://dtilhnn5osgca" path="res://assets/Personagens/Concha/Concha.gd" id="1_4sd70"]
-[ext_resource type="Texture2D" uid="uid://cjx2nelkiw01e" path="res://spr/shell.png" id="2_qyot8"]
+[ext_resource type="Texture2D" uid="uid://byekdrmffivvn" path="res://spr/shell.png" id="2_qyot8"]
 [ext_resource type="Script" uid="uid://c0xbsf22mkuqm" path="res://Abstract/Finite State Machine/StateMachine.gd" id="3_k30rj"]
-[ext_resource type="Script" uid="uid://dvlr2d1dx8vef" path="res://Abstract/Finite State Machine/State.gd" id="4_2tm0m"]
-[ext_resource type="Script" uid="uid://dpn5gyq4rguoa" path="res://Utils/NullObjects/NullHability.gd" id="5_2tm0m"]
+[ext_resource type="Script" uid="uid://di2unrk7y5yhc" path="res://assets/Personagens/Concha/States/Idle.gd" id="3_le10y"]
+[ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="6_le10y"]
+[ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="7_pq4xt"]
+[ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="8_h03wd"]
+
+[sub_resource type="GDScript" id="GDScript_sg2f6"]
+script/source = "extends Character
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tiixu"]
 atlas = ExtResource("2_qyot8")
@@ -128,7 +143,7 @@ animations = [{
 
 [sub_resource type="Animation" id="Animation_qyot8"]
 resource_name = "Idle"
-length = 2.049494
+length = 1.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -149,7 +164,7 @@ tracks/1/path = NodePath(".:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1356506, 0.26490325, 0.40110797, 0.52741534, 0.6504731, 0.77510494, 0.9044591, 1.0338134, 1.1653832, 1.2956699, 1.4225174, 1.5487236, 1.6733555, 1.805968, 1.935664),
+"times": PackedFloat32Array(0, 0.09155501, 0.17215042, 0.25893766, 0.3441905, 0.43683755, 0.55152637, 0.6588327, 0.7562557, 0.8558942, 0.9489279, 1.0425551, 1.1404592, 1.231639, 1.3315603, 1.4217222),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
@@ -188,8 +203,16 @@ _data = {
 &"RESET": SubResource("Animation_tiixu")
 }
 
-[node name="Concha" type="Node2D" unique_id=741582649]
-script = ExtResource("1_4sd70")
+[node name="Concha" type="Node2D" unique_id=741582649 node_paths=PackedStringArray("vida", "stamina", "almas", "first_hability", "second_hability", "third_hability", "animation_player", "state_machine")]
+script = SubResource("GDScript_sg2f6")
+vida = NodePath("Dados/Status/Vida")
+stamina = NodePath("Dados/Status/Stamina")
+almas = NodePath("Dados/Status/Almas")
+first_hability = NodePath("")
+second_hability = NodePath("")
+third_hability = NodePath("")
+animation_player = NodePath("AnimationPlayer")
+state_machine = NodePath("Dados/StateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=454902844]
 sprite_frames = SubResource("SpriteFrames_3f2y8")
@@ -203,17 +226,27 @@ libraries/ = SubResource("AnimationLibrary_k30rj")
 position = Vector2(-93, -97)
 rect = Rect2(63, 36, 61, 107)
 
-[node name="StateMachine" type="Node" parent="." unique_id=29123559 node_paths=PackedStringArray("initial_state")]
+[node name="Dados" type="Node2D" parent="." unique_id=374545796]
+
+[node name="StateMachine" type="Node" parent="Dados" unique_id=29123559]
 script = ExtResource("3_k30rj")
-initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1894133295 node_paths=PackedStringArray("hability", "character")]
-script = ExtResource("4_2tm0m")
-hability = NodePath("NullHability")
-character = NodePath("../..")
+[node name="Idle" type="Node" parent="Dados/StateMachine" unique_id=1894133295 node_paths=PackedStringArray("hability")]
+script = ExtResource("3_le10y")
+hability = NodePath("")
 metadata/_custom_type_script = "uid://dvlr2d1dx8vef"
 
-[node name="NullHability" type="Node" parent="StateMachine/Idle" unique_id=1840974293]
-script = ExtResource("5_2tm0m")
-metadata/_custom_type_script = "uid://dpn5gyq4rguoa"
+[node name="Status" type="Node2D" parent="Dados" unique_id=82423713]
+
+[node name="Vida" type="Node" parent="Dados/Status" unique_id=1681365759]
+script = ExtResource("6_le10y")
+metadata/_custom_type_script = "uid://c13d1l2ij0mkb"
+
+[node name="Stamina" type="Node" parent="Dados/Status" unique_id=1423228393]
+script = ExtResource("7_pq4xt")
+metadata/_custom_type_script = "uid://c8cg80vmv3go2"
+
+[node name="Almas" type="Node" parent="Dados/Status" unique_id=978418522]
+script = ExtResource("8_h03wd")
+metadata/_custom_type_script = "uid://dso3jlrsyo3c2"

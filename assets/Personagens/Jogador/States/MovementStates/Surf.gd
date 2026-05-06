@@ -2,17 +2,17 @@ class_name Surf extends PlayerState
 
 	
 func physics_update(_delta: float) -> void:	
-	hability.execute(character, _delta)
 	
-	if character.stamina.actual_stamina < hability.cost:
-		hability.finish(character, _delta)
-		finished.emit(WALKING)
-		return
-		
-	elif Input.is_action_just_released(Controls.FIRST_HABILITY_INPUT):
-		hability.finish(character, _delta)
-		finished.emit(WALKING)
-		return
+	var response: HabilityResponse = hability.execute(character, _delta)
+	
+	match response.status:
+		Response.FAILED, Response.CANCELLED:
+			hability.finish(character, _delta)
+			finished.emit(WALKING)
+		Response.RUNNING:
+			pass
+		_:
+			assert(false, "Resposta não identificada")	
 
 
 func enter(previous_state_path: String, data := {}) -> void:

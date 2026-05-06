@@ -11,6 +11,7 @@ class_name StateMachine extends Node
 
 # Se conecta a todos os signals de finished dos estados da node tree
 func _ready() -> void:
+	print("Iniciando State Machine", state)
 	for state_node: State in find_children("*", "State"):
 		state_node.finished.connect(_transition_to_next_state)
 
