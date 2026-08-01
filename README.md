@@ -1,5 +1,8 @@
 # aqua
- 
+
+# Bugs
+-> FullScreen faz a camera sair dos limites
+
 # afazeres
 -> Botar area2D nos tile pra botar som
 -> Atualizar o algoritmo do surf pra simular uma aceleração centrípeta

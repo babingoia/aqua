@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://d0fpoi50fodcq"]
+
+[ext_resource type="Texture2D" uid="uid://dm0ck2j8nlix4" path="res://spr/Obstaculos/Pilares/Pilar 6 (1) (1).png" id="1_flpmj"]
+
+[node name="Pilar6(1)(1)" type="Node2D" unique_id=9051364]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2066989746]
+position = Vector2(-8, -13)
+texture = ExtResource("1_flpmj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1808682778]
+position = Vector2(-8, -13)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1924951860]
+position = Vector2(-54, 16)
+scale = Vector2(1.0000002, 1.0528846)
+build_mode = 1
+polygon = PackedVector2Array(67.999985, 0.9497719, 65.999985, 3.799087, 62.999985, 4.748859, 59.999985, 5.698631, 38.999992, 6.6484027, 41.99999, -6.648402, 46.99999, -9.497717, 53.999985, -12.347033, 60.999985, -14.246576, 67.999985, -16.14612)

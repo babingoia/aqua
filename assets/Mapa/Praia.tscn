@@ -15,8 +15,15 @@
 [ext_resource type="PackedScene" uid="uid://4vixs7cxekm" path="res://assets/Mapa/Objetos/Pedras/pedra 8.tscn" id="13_l6nwn"]
 [ext_resource type="PackedScene" uid="uid://dqjh2an6qhw0v" path="res://assets/Mapa/Objetos/Pedras/pedra 4.tscn" id="14_l6nwn"]
 [ext_resource type="PackedScene" uid="uid://cb25jmh133gey" path="res://assets/Mapa/Objetos/Pedras/pedra 5.tscn" id="15_vl6i4"]
+[ext_resource type="PackedScene" uid="uid://bgfk13nkibov0" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar_6_head_1.tscn" id="17_0uqux"]
+[ext_resource type="PackedScene" uid="uid://d0fpoi50fodcq" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar 6 (1).tscn" id="18_0uqux"]
+[ext_resource type="PackedScene" uid="uid://b5x2k51pylnnd" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar_6_head_2.tscn" id="18_gqlta"]
 [ext_resource type="PackedScene" uid="uid://ooicsxdemuhj" path="res://assets/Mapa/Objetos/Pilares/pilar 5.tscn" id="19_fnpmd"]
-[ext_resource type="PackedScene" uid="uid://m3cxlc555rcj" path="res://assets/Mapa/Objetos/Pilares/pilar 6.tscn" id="20_0uqux"]
+[ext_resource type="PackedScene" uid="uid://dyah16y8qj0eq" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar 6 (1) (1).tscn" id="19_gqlta"]
+[ext_resource type="PackedScene" uid="uid://b5iny6vmqo2np" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar_6_body_4.tscn" id="21_2k6f1"]
+[ext_resource type="PackedScene" uid="uid://b3i8wqbbi3b44" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar_6_body_3.tscn" id="22_8ld1d"]
+[ext_resource type="PackedScene" uid="uid://cmsni3vfxxhva" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar_6_tail_1.tscn" id="23_6n5j4"]
+[ext_resource type="PackedScene" uid="uid://cs82drduoighl" path="res://assets/Mapa/Objetos/Pilares/Pilar 6/pilar_6_tail_2.tscn" id="24_x688i"]
 [ext_resource type="PackedScene" uid="uid://dus5yvchaoxeb" path="res://assets/Mapa/Objetos/Pedras/pedra 1.tscn" id="36_0km1r"]
 [ext_resource type="PackedScene" uid="uid://cyu1u1vd2xtuc" path="res://assets/Mapa/Objetos/Pedras/pedra 2.tscn" id="36_8qrxr"]
 
@@ -33,7 +40,7 @@ limit_right = 640
 limit_bottom = 360
 editor_draw_limits = true
 player = NodePath("../../Objects/Sprite")
-concha = NodePath("../../Objects/Concha")
+concha = NodePath("../../Objects/Sprite")
 zoom_smothness = 10.0
 move_speed = 2.0
 min_zoom = 1.5
@@ -97,9 +104,29 @@ position = Vector2(548, 65)
 [node name="Pilar5" parent="Objects/Pilares" unique_id=2056487010 instance=ExtResource("19_fnpmd")]
 position = Vector2(447, 291)
 
-[node name="Pilar6" parent="Objects/Pilares" unique_id=835842095 instance=ExtResource("20_0uqux")]
-y_sort_enabled = false
-position = Vector2(-134, 253)
+[node name="Pilar6Head1" parent="Objects/Pilares" unique_id=441703415 instance=ExtResource("17_0uqux")]
+position = Vector2(-181, 293)
+
+[node name="Pilar6Head2" parent="Objects/Pilares" unique_id=652218126 instance=ExtResource("18_gqlta")]
+position = Vector2(-197, 277)
+
+[node name="Pilar6(1)(1)" parent="Objects/Pilares" unique_id=378066298 instance=ExtResource("19_gqlta")]
+position = Vector2(-150, 264)
+
+[node name="Pilar6(1)(1)2" parent="Objects/Pilares" unique_id=9051364 instance=ExtResource("18_0uqux")]
+position = Vector2(-165, 274)
+
+[node name="Pilar6Body4" parent="Objects/Pilares" unique_id=683875485 instance=ExtResource("21_2k6f1")]
+position = Vector2(-123, 256)
+
+[node name="Pilar6Body3" parent="Objects/Pilares" unique_id=423828733 instance=ExtResource("22_8ld1d")]
+position = Vector2(-135, 261)
+
+[node name="Pilar6Tail1" parent="Objects/Pilares" unique_id=1221642003 instance=ExtResource("23_6n5j4")]
+position = Vector2(-106, 258)
+
+[node name="Pilar6Tail2" parent="Objects/Pilares" unique_id=465168912 instance=ExtResource("24_x688i")]
+position = Vector2(-117, 258)
 
 [node name="Boundaries" type="Node" parent="Objects" unique_id=1432155428]
 
@@ -111,7 +138,7 @@ build_mode = 1
 polygon = PackedVector2Array(-640, -360, -640, 360, 640, 360, 640, -360)
 
 [node name="Sprite" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
-position = Vector2(-105, 14)
+position = Vector2(-148, 241)
 
 [node name="Concha" parent="Objects" unique_id=741582649 instance=ExtResource("12_jv64s")]
-position = Vector2(-2, -4)
+position = Vector2(-86, -63)
