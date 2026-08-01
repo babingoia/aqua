@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://423plr8e12gx"]
+
+[ext_resource type="Texture2D" uid="uid://sak0ux4aelvi" path="res://spr/Obstaculos/Pedras/pedra 7.png" id="1_p0tvc"]
+
+[node name="Pedra7" type="Node2D" unique_id=1699961679]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1814760821]
+texture = ExtResource("1_p0tvc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1829203232]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=528676876]
+build_mode = 1
+polygon = PackedVector2Array(-26, 11, -22, 18, -17, 21, 1, 25, 11, 22, 25, 26, 25, 22, 15, 14, 3, 9, -12, 8, -22, 7)

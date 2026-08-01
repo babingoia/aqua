@@ -1,17 +1,24 @@
-[gd_scene format=3 uid="uid://c1jl7cwghi0xc"]
+[gd_scene format=3 uid="uid://bxrs4jnlpadox"]
 
-[ext_resource type="Texture2D" uid="uid://xjplsojd8rc7" path="res://spr/praias.png" id="1_b40mp"]
-[ext_resource type="Texture2D" uid="uid://ccoejg3oa2uq2" path="res://spr/mari.png" id="2_6ffje"]
-[ext_resource type="Texture2D" uid="uid://d1vwavl8oqiwf" path="res://spr/map-water.png" id="2_rscwd"]
-[ext_resource type="Texture2D" uid="uid://c0fx1qsbajs5x" path="res://spr/map-deepwater.png" id="3_6ffje"]
-[ext_resource type="Texture2D" uid="uid://bld10y0shxo1y" path="res://spr/shadows.png" id="4_iyafg"]
-[ext_resource type="Texture2D" uid="uid://x20ss5lltc6m" path="res://spr/water-effects.png" id="5_fbu2e"]
-[ext_resource type="Texture2D" uid="uid://bm7vjkfvm0oak" path="res://spr/pillars.png" id="6_jv64s"]
-[ext_resource type="Texture2D" uid="uid://180actm402d2" path="res://spr/rocks.png" id="7_cns32"]
+[ext_resource type="Texture2D" uid="uid://bcfp0vn4n6uf7" path="res://spr/map.png" id="3_rwc61"]
+[ext_resource type="PackedScene" uid="uid://bde3d6jom0uv5" path="res://assets/Mapa/Objetos/Pilares/pilar 1.tscn" id="4_fbu2e"]
+[ext_resource type="PackedScene" uid="uid://c6cyvdj5lqvvj" path="res://assets/Mapa/Objetos/Pilares/pilar 4.tscn" id="4_vl6i4"]
+[ext_resource type="PackedScene" uid="uid://c23ndtt5d5n3g" path="res://assets/Mapa/Objetos/Pilares/pilar 2.tscn" id="5_jv64s"]
+[ext_resource type="PackedScene" uid="uid://dmdjhkxkkkr3h" path="res://assets/Mapa/Objetos/Pilares/pilar 3.tscn" id="6_l6nwn"]
 [ext_resource type="PackedScene" uid="uid://dl3guhty12atl" path="res://assets/Personagens/Jogador/Player.tscn" id="8_s6v1p"]
 [ext_resource type="PackedScene" uid="uid://ddanmnoy7w2qg" path="res://assets/outros/Camera/Camera.tscn" id="9_rscwd"]
+[ext_resource type="PackedScene" uid="uid://cm535evmgug4x" path="res://assets/Mapa/Objetos/Pedras/pedra 6.tscn" id="11_cns32"]
 [ext_resource type="PackedScene" uid="uid://bpjtlp1n4plhm" path="res://assets/Personagens/Inimigos/Petralhudo/Petralhudo.tscn" id="11_fbu2e"]
 [ext_resource type="PackedScene" uid="uid://cqogjht13o84q" path="res://assets/Personagens/Concha/Concha.tscn" id="12_jv64s"]
+[ext_resource type="PackedScene" uid="uid://423plr8e12gx" path="res://assets/Mapa/Objetos/Pedras/pedra 7.tscn" id="12_s6v1p"]
+[ext_resource type="PackedScene" uid="uid://d2356jdrvwuiy" path="res://assets/Mapa/Objetos/Pedras/pedra 3.tscn" id="13_0xu4t"]
+[ext_resource type="PackedScene" uid="uid://4vixs7cxekm" path="res://assets/Mapa/Objetos/Pedras/pedra 8.tscn" id="13_l6nwn"]
+[ext_resource type="PackedScene" uid="uid://dqjh2an6qhw0v" path="res://assets/Mapa/Objetos/Pedras/pedra 4.tscn" id="14_l6nwn"]
+[ext_resource type="PackedScene" uid="uid://cb25jmh133gey" path="res://assets/Mapa/Objetos/Pedras/pedra 5.tscn" id="15_vl6i4"]
+[ext_resource type="PackedScene" uid="uid://ooicsxdemuhj" path="res://assets/Mapa/Objetos/Pilares/pilar 5.tscn" id="19_fnpmd"]
+[ext_resource type="PackedScene" uid="uid://m3cxlc555rcj" path="res://assets/Mapa/Objetos/Pilares/pilar 6.tscn" id="20_0uqux"]
+[ext_resource type="PackedScene" uid="uid://dus5yvchaoxeb" path="res://assets/Mapa/Objetos/Pedras/pedra 1.tscn" id="36_0km1r"]
+[ext_resource type="PackedScene" uid="uid://cyu1u1vd2xtuc" path="res://assets/Mapa/Objetos/Pedras/pedra 2.tscn" id="36_8qrxr"]
 
 [node name="Praia" type="Node2D" unique_id=906326908]
 
@@ -19,54 +26,84 @@
 z_index = -1
 
 [node name="Camera" parent="Outros" unique_id=1529914638 node_paths=PackedStringArray("player", "concha") instance=ExtResource("9_rscwd")]
+position = Vector2(25, 21)
 player = NodePath("../../Objects/Player")
 concha = NodePath("../../Objects/Player")
 min_zoom = 2.5
 max_zoom = 10.0
 
 [node name="Limites" type="ColorRect" parent="Outros/Camera" unique_id=114683724]
-offset_left = -640.0
-offset_top = -359.0
-offset_right = 640.0
-offset_bottom = 361.0
+offset_left = -665.0
+offset_top = -381.0
+offset_right = 615.0
+offset_bottom = 339.0
 color = Color(1, 0, 0, 1)
-
-[node name="Mari" type="Sprite2D" parent="Outros" unique_id=1148029663]
-position = Vector2(33, 7)
-texture = ExtResource("2_6ffje")
 
 [node name="Background" type="Node2D" parent="." unique_id=1260272865]
 
-[node name="Areia" type="Sprite2D" parent="Background" unique_id=1270636921]
-texture = ExtResource("1_b40mp")
-
-[node name="AguaRasa" type="Sprite2D" parent="Background" unique_id=1616548478]
-texture = ExtResource("2_rscwd")
-
-[node name="AguaFunda" type="Sprite2D" parent="Background" unique_id=1427167654]
-texture = ExtResource("3_6ffje")
-
-[node name="Sombras" type="Sprite2D" parent="Background" unique_id=511676953]
-texture = ExtResource("4_iyafg")
-
-[node name="EfeitosAgua" type="Sprite2D" parent="Background" unique_id=627346274]
-texture = ExtResource("5_fbu2e")
+[node name="Mapa" type="Sprite2D" parent="Background" unique_id=1270636921]
+texture = ExtResource("3_rwc61")
 
 [node name="Objects" type="Node2D" parent="." unique_id=1698423070]
 z_index = 1
 y_sort_enabled = true
 
-[node name="Pilares" type="Sprite2D" parent="Objects" unique_id=930515602]
-texture = ExtResource("6_jv64s")
-
-[node name="Pedras" type="Sprite2D" parent="Objects" unique_id=1294179302]
-texture = ExtResource("7_cns32")
-
-[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
-position = Vector2(-55, 2)
-
 [node name="Petralhudo" parent="Objects" unique_id=1039303583 instance=ExtResource("11_fbu2e")]
+y_sort_enabled = true
 position = Vector2(-106, 38)
 
 [node name="Concha" parent="Objects" unique_id=741582649 instance=ExtResource("12_jv64s")]
-position = Vector2(-10, -13)
+y_sort_enabled = true
+position = Vector2(-1, -94)
+
+[node name="Pedras" type="Node2D" parent="Objects" unique_id=1842119400]
+y_sort_enabled = true
+
+[node name="Pedra1" parent="Objects/Pedras" unique_id=1384265765 instance=ExtResource("36_0km1r")]
+position = Vector2(-596, -254)
+
+[node name="Pedra2" parent="Objects/Pedras" unique_id=884081373 instance=ExtResource("36_8qrxr")]
+position = Vector2(-434, -269)
+
+[node name="Pedra3" parent="Objects/Pedras" unique_id=1324234928 instance=ExtResource("13_0xu4t")]
+position = Vector2(-281, -269)
+
+[node name="Pedra4" parent="Objects/Pedras" unique_id=266763933 instance=ExtResource("14_l6nwn")]
+position = Vector2(138, -324)
+
+[node name="Pedra5" parent="Objects/Pedras" unique_id=1523028555 instance=ExtResource("15_vl6i4")]
+position = Vector2(150, -276)
+
+[node name="Pedra6" parent="Objects/Pedras" unique_id=423761035 instance=ExtResource("11_cns32")]
+position = Vector2(365, -257)
+
+[node name="Pedra7" parent="Objects/Pedras" unique_id=1699961679 instance=ExtResource("12_s6v1p")]
+position = Vector2(327, -121)
+
+[node name="Pedra8" parent="Objects/Pedras" unique_id=756528926 instance=ExtResource("13_l6nwn")]
+position = Vector2(275, -118)
+
+[node name="Pilares" type="Node2D" parent="Objects" unique_id=337663241]
+y_sort_enabled = true
+
+[node name="Pilar1" parent="Objects/Pilares" unique_id=1531154424 instance=ExtResource("4_fbu2e")]
+position = Vector2(-543, -265)
+
+[node name="Pilar2" parent="Objects/Pilares" unique_id=884807979 instance=ExtResource("5_jv64s")]
+position = Vector2(569, -275)
+
+[node name="Pilar3" parent="Objects/Pilares" unique_id=1795386964 instance=ExtResource("6_l6nwn")]
+position = Vector2(214, -88)
+
+[node name="Pilar4" parent="Objects/Pilares" unique_id=1619386797 instance=ExtResource("4_vl6i4")]
+position = Vector2(548, 65)
+
+[node name="Pilar5" parent="Objects/Pilares" unique_id=2056487010 instance=ExtResource("19_fnpmd")]
+position = Vector2(447, 291)
+
+[node name="Pilar6" parent="Objects/Pilares" unique_id=835842095 instance=ExtResource("20_0uqux")]
+y_sort_enabled = false
+position = Vector2(-134, 253)
+
+[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
+position = Vector2(-220, 322)

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c6cyvdj5lqvvj"]
+
+[ext_resource type="Texture2D" uid="uid://cup7eabhqkkdn" path="res://spr/Obstaculos/Pilares/pilar 4.png" id="1_52w5r"]
+
+[node name="Pilar4" type="Node2D" unique_id=1619386797]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=761519478]
+position = Vector2(-1.5, -22.5)
+texture = ExtResource("1_52w5r")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=234326550]
+position = Vector2(-1.5, -22.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1906655109]
+build_mode = 1
+polygon = PackedVector2Array(0, 59, 29, 44, 2, 29, -28, 42)

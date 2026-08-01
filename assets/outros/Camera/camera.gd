@@ -22,7 +22,7 @@ var map_limits: Rect2
 func _ready() -> void:
 	await owner.ready
 	
-	player_na_tela = player.get_node("OnScreen")
+	player_na_tela = player.get_node("%OnScreen")
 	concha_na_tela = concha.get_node("OnScreen")
 	zoom = Vector2(0.4, 0.4)
 	map_limits = get_node("Limites").get_rect()

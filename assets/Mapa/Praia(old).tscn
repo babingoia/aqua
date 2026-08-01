@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://c1jl7cwghi0xc"]
+
+[ext_resource type="Texture2D" uid="uid://xjplsojd8rc7" path="res://spr/praias.png" id="1_b40mp"]
+[ext_resource type="Texture2D" uid="uid://ccoejg3oa2uq2" path="res://spr/mari.png" id="2_6ffje"]
+[ext_resource type="Texture2D" uid="uid://d1vwavl8oqiwf" path="res://spr/map-water.png" id="2_rscwd"]
+[ext_resource type="Texture2D" uid="uid://c0fx1qsbajs5x" path="res://spr/map-deepwater.png" id="3_6ffje"]
+[ext_resource type="Texture2D" uid="uid://bld10y0shxo1y" path="res://spr/shadows.png" id="4_iyafg"]
+[ext_resource type="Texture2D" uid="uid://x20ss5lltc6m" path="res://spr/water-effects.png" id="5_fbu2e"]
+[ext_resource type="Texture2D" uid="uid://bm7vjkfvm0oak" path="res://spr/pillars.png" id="6_jv64s"]
+[ext_resource type="Texture2D" uid="uid://180actm402d2" path="res://spr/rocks.png" id="7_cns32"]
+[ext_resource type="PackedScene" uid="uid://dl3guhty12atl" path="res://assets/Personagens/Jogador/Player.tscn" id="8_s6v1p"]
+[ext_resource type="PackedScene" uid="uid://ddanmnoy7w2qg" path="res://assets/outros/Camera/Camera.tscn" id="9_rscwd"]
+[ext_resource type="PackedScene" uid="uid://bpjtlp1n4plhm" path="res://assets/Personagens/Inimigos/Petralhudo/Petralhudo.tscn" id="11_fbu2e"]
+[ext_resource type="PackedScene" uid="uid://cqogjht13o84q" path="res://assets/Personagens/Concha/Concha.tscn" id="12_jv64s"]
+
+[node name="Praia" type="Node2D" unique_id=906326908]
+
+[node name="Outros" type="Node2D" parent="." unique_id=1138334584]
+z_index = -1
+
+[node name="Camera" parent="Outros" unique_id=1529914638 node_paths=PackedStringArray("player", "concha") instance=ExtResource("9_rscwd")]
+player = NodePath("../../Objects/Player")
+concha = NodePath("../../Objects/Player")
+min_zoom = 2.5
+max_zoom = 10.0
+
+[node name="Limites" type="ColorRect" parent="Outros/Camera" unique_id=114683724]
+offset_left = -640.0
+offset_top = -359.0
+offset_right = 640.0
+offset_bottom = 361.0
+color = Color(1, 0, 0, 1)
+
+[node name="Mari" type="Sprite2D" parent="Outros" unique_id=1148029663]
+position = Vector2(33, 7)
+texture = ExtResource("2_6ffje")
+
+[node name="Background" type="Node2D" parent="." unique_id=1260272865]
+
+[node name="Areia" type="Sprite2D" parent="Background" unique_id=1270636921]
+texture = ExtResource("1_b40mp")
+
+[node name="AguaRasa" type="Sprite2D" parent="Background" unique_id=1616548478]
+texture = ExtResource("2_rscwd")
+
+[node name="AguaFunda" type="Sprite2D" parent="Background" unique_id=1427167654]
+texture = ExtResource("3_6ffje")
+
+[node name="Sombras" type="Sprite2D" parent="Background" unique_id=511676953]
+texture = ExtResource("4_iyafg")
+
+[node name="EfeitosAgua" type="Sprite2D" parent="Background" unique_id=627346274]
+texture = ExtResource("5_fbu2e")
+
+[node name="Objects" type="Node2D" parent="." unique_id=1698423070]
+z_index = 1
+y_sort_enabled = true
+
+[node name="Pilares" type="Sprite2D" parent="Objects" unique_id=930515602]
+texture = ExtResource("6_jv64s")
+
+[node name="Pedras" type="Sprite2D" parent="Objects" unique_id=1294179302]
+texture = ExtResource("7_cns32")
+
+[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
+position = Vector2(-55, 2)
+
+[node name="Petralhudo" parent="Objects" unique_id=1039303583 instance=ExtResource("11_fbu2e")]
+position = Vector2(-106, 38)
+
+[node name="Concha" parent="Objects" unique_id=741582649 instance=ExtResource("12_jv64s")]
+position = Vector2(-10, -13)

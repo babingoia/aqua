@@ -29,7 +29,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rk6f"]
-size = Vector2(16, 49)
+size = Vector2(8, 3.8125)
 
 [sub_resource type="Animation" id="Animation_ajy2y"]
 length = 0.001
@@ -100,7 +100,7 @@ _data = {
 &"walking": SubResource("Animation_4td50")
 }
 
-[node name="Player" type="CharacterBody2D" unique_id=527051746 node_paths=PackedStringArray("movement_state_machine", "vida", "velocidade", "stamina", "almas", "first_hability", "animation_player")]
+[node name="Sprite" type="CharacterBody2D" unique_id=527051746 node_paths=PackedStringArray("movement_state_machine", "vida", "velocidade", "stamina", "almas", "first_hability", "animation_player")]
 script = ExtResource("1_j2hai")
 movement_state_machine = NodePath("dados/MovementStateMachine")
 vida = NodePath("dados/Status/Vida")
@@ -112,6 +112,7 @@ animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1103833997]
 texture_filter = 1
+position = Vector2(0.22400093, -23)
 scale = Vector2(0.507, 1)
 sprite_frames = SubResource("SpriteFrames_v8djh")
 animation = &"idle"
@@ -120,13 +121,15 @@ animation = &"idle"
 shape = SubResource("RectangleShape2D_1rk6f")
 
 [node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
-position = Vector2(-99, -100)
+unique_name_in_owner = true
+position = Vector2(-98.776, -123)
 rect = Rect2(97, 97, 3, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1680384423]
 libraries/ = SubResource("AnimationLibrary_ajy2y")
 
 [node name="dados" type="Node2D" parent="." unique_id=492503571]
+position = Vector2(0.22400093, -23)
 
 [node name="MovementStateMachine" type="Node" parent="dados" unique_id=306926093 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_5481f")
@@ -170,6 +173,7 @@ script = ExtResource("9_bug2i")
 metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
 
 [node name="Habilidades" type="Node2D" parent="dados" unique_id=514290851]
+position = Vector2(-0.22400093, 0)
 
 [node name="HabilitySurf" type="Node" parent="dados/Habilidades" unique_id=166534084]
 unique_name_in_owner = true

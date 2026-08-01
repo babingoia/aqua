@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cb25jmh133gey"]
+
+[ext_resource type="Texture2D" uid="uid://0t85t62ub5k4" path="res://spr/Obstaculos/Pedras/pedra 5.png" id="1_ei37x"]
+
+[node name="Pedra5" type="Node2D" unique_id=1523028555]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=352085677]
+position = Vector2(0, 6)
+texture = ExtResource("1_ei37x")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=457534973]
+position = Vector2(0, 6)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=541802982]
+build_mode = 1
+polygon = PackedVector2Array(-28, 18, 18, 16, 27, 9, -6, 8)
