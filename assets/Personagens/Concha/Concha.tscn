@@ -203,14 +203,11 @@ _data = {
 &"RESET": SubResource("Animation_tiixu")
 }
 
-[node name="Concha" type="Node2D" unique_id=741582649 node_paths=PackedStringArray("vida", "stamina", "almas", "first_hability", "second_hability", "third_hability", "animation_player", "state_machine")]
+[node name="Concha" type="Node2D" unique_id=741582649 node_paths=PackedStringArray("vida", "stamina", "almas", "animation_player", "state_machine")]
 script = SubResource("GDScript_sg2f6")
 vida = NodePath("Dados/Status/Vida")
 stamina = NodePath("Dados/Status/Stamina")
 almas = NodePath("Dados/Status/Almas")
-first_hability = NodePath("")
-second_hability = NodePath("")
-third_hability = NodePath("")
 animation_player = NodePath("AnimationPlayer")
 state_machine = NodePath("Dados/StateMachine")
 
@@ -222,19 +219,14 @@ animation = &"Idle"
 root_node = NodePath("../AnimatedSprite2D")
 libraries/ = SubResource("AnimationLibrary_k30rj")
 
-[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=676811357]
-position = Vector2(-93, -97)
-rect = Rect2(63, 36, 61, 107)
-
 [node name="Dados" type="Node2D" parent="." unique_id=374545796]
 
 [node name="StateMachine" type="Node" parent="Dados" unique_id=29123559]
 script = ExtResource("3_k30rj")
 metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
 
-[node name="Idle" type="Node" parent="Dados/StateMachine" unique_id=1894133295 node_paths=PackedStringArray("hability")]
+[node name="Idle" type="Node" parent="Dados/StateMachine" unique_id=1894133295]
 script = ExtResource("3_le10y")
-hability = NodePath("")
 metadata/_custom_type_script = "uid://dvlr2d1dx8vef"
 
 [node name="Status" type="Node2D" parent="Dados" unique_id=82423713]
@@ -250,3 +242,22 @@ metadata/_custom_type_script = "uid://c8cg80vmv3go2"
 [node name="Almas" type="Node" parent="Dados/Status" unique_id=978418522]
 script = ExtResource("8_h03wd")
 metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
+
+[node name="OnScreen" type="Node2D" parent="." unique_id=1862038314]
+
+[node name="OnScreenLeft" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=676811357]
+unique_name_in_owner = true
+position = Vector2(-140, -151)
+rect = Rect2(90, 119, 20, 20)
+
+[node name="OnScreenRight" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=1701591299]
+unique_name_in_owner = true
+position = Vector2(42, -26)
+
+[node name="OnScreenUp" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=1759699024]
+unique_name_in_owner = true
+position = Vector2(2, -71)
+
+[node name="OnScreenDown" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=2110321796]
+unique_name_in_owner = true
+position = Vector2(-2, 24)

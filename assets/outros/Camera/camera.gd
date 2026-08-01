@@ -2,8 +2,9 @@ extends Camera2D
 
 @export var player: Character
 @export var concha: Character
-var player_na_tela: VisibleOnScreenNotifier2D
-var concha_na_tela: VisibleOnScreenNotifier2D
+
+var player_na_tela: Dictionary[String, VisibleOnScreenNotifier2D]
+var concha_na_tela: Dictionary[String, VisibleOnScreenNotifier2D]
 
 @export var zoom_smothness: float = 5
 @export var move_speed: float = 0.5
@@ -16,24 +17,27 @@ var zoom_current: Vector2
 var vec_min_zoom: Vector2
 var vec_max_zoom: Vector2
 var vec_zoom_speed: Vector2 
-var map_limits: Rect2
 
 
 func _ready() -> void:
 	await owner.ready
 	
-	player_na_tela = player.get_node("%OnScreen")
-	concha_na_tela = concha.get_node("OnScreen")
+	player_na_tela = {
+	"left": player.get_node("%OnScreenLeft"),
+	"right": player.get_node("%OnScreenRight"),
+	"up": player.get_node("%OnScreenUp"),
+	"down": player.get_node("%OnScreenDown")
+}
+	concha_na_tela = {
+	"left": concha.get_node("%OnScreenLeft"),
+	"right": concha.get_node("%OnScreenRight"),
+	"up": concha.get_node("%OnScreenUp"),
+	"down": concha.get_node("%OnScreenDown")
+}
+
 	zoom = Vector2(0.4, 0.4)
-	map_limits = get_node("Limites").get_rect()
 	
 	print(player_na_tela, concha_na_tela)
-	
-	limit_enabled = true
-	limit_top = map_limits.position.y
-	limit_left = map_limits.position.x
-	limit_bottom = map_limits.end.y
-	limit_right = map_limits.end.x
 	
 	vec_max_zoom = Vector2(max_zoom, max_zoom)
 	vec_min_zoom = Vector2(min_zoom, min_zoom)
@@ -41,9 +45,21 @@ func _ready() -> void:
 	zoom_target = zoom
 
 
+func is_on_screen_dict(target: Dictionary[String, VisibleOnScreenNotifier2D]) -> bool:
+	var left: bool = target["left"].is_on_screen()
+	var right: bool = target["right"].is_on_screen()
+	var up: bool = target["up"].is_on_screen()
+	var down: bool = target["down"].is_on_screen()
+	
+	if left and right and up and down:
+		return true
+	else:
+		return false
+
+
 func _input(event: InputEvent) -> void:
-	if player_na_tela.is_on_screen() and concha_na_tela.is_on_screen():
-		
+	if is_on_screen_dict(player_na_tela) and is_on_screen_dict(concha_na_tela):
+		 
 		if event.is_action_pressed(Controls.ZOOM_IN) and zoom < vec_max_zoom:
 			zoom_target = clamp(zoom + vec_zoom_speed, vec_min_zoom, vec_max_zoom)
 			
@@ -57,13 +73,13 @@ func _process(delta: float) -> void:
 	
 	var center: Vector2 = Vector2.ZERO
 	
-	center += concha.position
-	center += player.position
+	center += concha.global_position
+	center += player.global_position
 	center /= 2
 	
-	position = lerp(position, center, move_speed)
+	global_position = lerp(global_position, center, move_speed * delta)
 	
-	if !player_na_tela.is_on_screen() or !concha_na_tela.is_on_screen():
+	if !is_on_screen_dict(player_na_tela) or !is_on_screen_dict(concha_na_tela):
 		zoom_target = clamp(zoom - vec_zoom_speed, vec_min_zoom, vec_max_zoom)
 
 	if zoom != zoom_target:

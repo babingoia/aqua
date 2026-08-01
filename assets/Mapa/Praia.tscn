@@ -27,17 +27,17 @@ z_index = -1
 
 [node name="Camera" parent="Outros" unique_id=1529914638 node_paths=PackedStringArray("player", "concha") instance=ExtResource("9_rscwd")]
 position = Vector2(25, 21)
-player = NodePath("../../Objects/Player")
-concha = NodePath("../../Objects/Player")
-min_zoom = 2.5
+limit_left = -640
+limit_top = -360
+limit_right = 640
+limit_bottom = 360
+editor_draw_limits = true
+player = NodePath("../../Objects/Sprite")
+concha = NodePath("../../Objects/Concha")
+zoom_smothness = 10.0
+move_speed = 2.0
+min_zoom = 1.5
 max_zoom = 10.0
-
-[node name="Limites" type="ColorRect" parent="Outros/Camera" unique_id=114683724]
-offset_left = -665.0
-offset_top = -381.0
-offset_right = 615.0
-offset_bottom = 339.0
-color = Color(1, 0, 0, 1)
 
 [node name="Background" type="Node2D" parent="." unique_id=1260272865]
 
@@ -51,10 +51,6 @@ y_sort_enabled = true
 [node name="Petralhudo" parent="Objects" unique_id=1039303583 instance=ExtResource("11_fbu2e")]
 y_sort_enabled = true
 position = Vector2(-106, 38)
-
-[node name="Concha" parent="Objects" unique_id=741582649 instance=ExtResource("12_jv64s")]
-y_sort_enabled = true
-position = Vector2(-1, -94)
 
 [node name="Pedras" type="Node2D" parent="Objects" unique_id=1842119400]
 y_sort_enabled = true
@@ -105,5 +101,17 @@ position = Vector2(447, 291)
 y_sort_enabled = false
 position = Vector2(-134, 253)
 
-[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
-position = Vector2(-220, 322)
+[node name="Boundaries" type="Node" parent="Objects" unique_id=1432155428]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Objects/Boundaries" unique_id=411719910]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Objects/Boundaries/StaticBody2D" unique_id=1668780317]
+visible = false
+build_mode = 1
+polygon = PackedVector2Array(-640, -360, -640, 360, 640, 360, 640, -360)
+
+[node name="Sprite" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
+position = Vector2(-105, 14)
+
+[node name="Concha" parent="Objects" unique_id=741582649 instance=ExtResource("12_jv64s")]
+position = Vector2(-2, -4)

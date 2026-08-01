@@ -12,6 +12,7 @@ var third_hability: String
 const ANIM_IDLE: String = "Idle"
 const ANIM_WALKING: String = "Walking"
 var anim_first_hability: String
+var anim_second_hability: String
 
 
 func _ready() -> void:
@@ -20,7 +21,10 @@ func _ready() -> void:
 	print(character)
 	
 	first_hability = character.first_hability.state_name
+	second_hability = character.second_hability.state_name
+	
 	anim_first_hability = character.first_hability.anim_name
+	anim_second_hability = character.second_hability.state_name
 
 	assert(character != null,
 	 "O PlayerState precisa estar ligado a um Player") 

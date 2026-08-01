@@ -9,7 +9,7 @@ func physics_update(_delta: float) -> void:
 	
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entrando em Idle")
+	# print("Entrando em Idle")
 	character.velocity.x = 0.0
 	character.animation_player.play(ANIM_IDLE)
 	

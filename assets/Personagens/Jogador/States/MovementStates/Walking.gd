@@ -18,6 +18,6 @@ func physics_update(_delta: float) -> void:
 
 
 func enter(previous_state_path: String, data := {}) -> void:
-	print("Entrando em Walking")
+	# print("Entrando em Walking")
 	character.animation_player.play("walking")
 	

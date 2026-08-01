@@ -10,8 +10,11 @@
 [ext_resource type="Script" uid="uid://lj8mw8m4ro3y" path="res://components/velocidade.gd" id="6_cmw62"]
 [ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="7_4td50"]
 [ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="8_ajy2y"]
+[ext_resource type="Script" uid="uid://c8bi4l82a21an" path="res://assets/Personagens/Jogador/States/AttackStates/AttackAction.gd" id="8_bkl02"]
 [ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="9_bug2i"]
 [ext_resource type="Script" uid="uid://dju6saw4o5lqe" path="res://components/habilidades/HabilityWalk.gd" id="12_6euhf"]
+[ext_resource type="Script" uid="uid://c83lsq5throda" path="res://assets/Personagens/Jogador/States/AttackStates/IdleAction.gd" id="13_p3sjh"]
+[ext_resource type="Script" uid="uid://5q7v2d04meqn" path="res://components/habilidades/HabilityAttack.gd" id="15_bkl02"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bug2i"]
 atlas = ExtResource("2_ajy2y")
@@ -31,6 +34,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rk6f"]
 size = Vector2(8, 3.8125)
 
+[sub_resource type="Animation" id="Animation_bkl02"]
+resource_name = "Attack"
+
 [sub_resource type="Animation" id="Animation_ajy2y"]
 length = 0.001
 tracks/0/type = "value"
@@ -45,6 +51,12 @@ tracks/0/keys = {
 "update": 1,
 "values": [&"idle"]
 }
+
+[sub_resource type="Animation" id="Animation_xstrf"]
+resource_name = "Surf"
+
+[sub_resource type="Animation" id="Animation_i1tck"]
+resource_name = "Walking"
 
 [sub_resource type="Animation" id="Animation_cmw62"]
 resource_name = "idle"
@@ -62,45 +74,16 @@ tracks/0/keys = {
 "values": [&"idle"]
 }
 
-[sub_resource type="Animation" id="Animation_bug2i"]
-resource_name = "surf"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"surf"]
-}
-
-[sub_resource type="Animation" id="Animation_4td50"]
-resource_name = "walking"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"moving"]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ajy2y"]
 _data = {
+&"Attack": SubResource("Animation_bkl02"),
 &"RESET": SubResource("Animation_ajy2y"),
-&"idle": SubResource("Animation_cmw62"),
-&"surf": SubResource("Animation_bug2i"),
-&"walking": SubResource("Animation_4td50")
+&"Surf": SubResource("Animation_xstrf"),
+&"Walking": SubResource("Animation_i1tck"),
+&"idle": SubResource("Animation_cmw62")
 }
 
-[node name="Sprite" type="CharacterBody2D" unique_id=527051746 node_paths=PackedStringArray("movement_state_machine", "vida", "velocidade", "stamina", "almas", "first_hability", "animation_player")]
+[node name="Sprite" type="CharacterBody2D" unique_id=527051746 node_paths=PackedStringArray("movement_state_machine", "vida", "velocidade", "stamina", "almas", "first_hability", "second_hability", "animation_player")]
 script = ExtResource("1_j2hai")
 movement_state_machine = NodePath("dados/MovementStateMachine")
 vida = NodePath("dados/Status/Vida")
@@ -108,6 +91,7 @@ velocidade = NodePath("dados/Status/Velocidade")
 stamina = NodePath("dados/Status/Stamina")
 almas = NodePath("dados/Status/Almas")
 first_hability = NodePath("dados/Habilidades/HabilitySurf")
+second_hability = NodePath("dados/Habilidades/HabilityAttack")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1103833997]
@@ -119,11 +103,6 @@ animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1590607446]
 shape = SubResource("RectangleShape2D_1rk6f")
-
-[node name="OnScreen" type="VisibleOnScreenNotifier2D" parent="." unique_id=890488261]
-unique_name_in_owner = true
-position = Vector2(-98.776, -123)
-rect = Rect2(97, 97, 3, 3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1680384423]
 libraries/ = SubResource("AnimationLibrary_ajy2y")
@@ -149,6 +128,20 @@ metadata/_custom_type_script = "uid://d2at0ak7tkxea"
 script = ExtResource("6_ajy2y")
 hability = NodePath("../../Habilidades/HabilitySurf")
 metadata/_custom_type_script = "uid://ca7yp78tefryh"
+
+[node name="ActionStateMachine" type="Node" parent="dados" unique_id=1886041165 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_5481f")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
+
+[node name="Idle" type="Node" parent="dados/ActionStateMachine" unique_id=1642116319]
+script = ExtResource("13_p3sjh")
+metadata/_custom_type_script = "uid://cy332idfhg6gr"
+
+[node name="Attack" type="Node" parent="dados/ActionStateMachine" unique_id=160014024 node_paths=PackedStringArray("hability")]
+script = ExtResource("8_bkl02")
+hability = NodePath("../../Habilidades/HabilityAttack")
+metadata/_custom_type_script = "uid://cy332idfhg6gr"
 
 [node name="Status" type="Node2D" parent="dados" unique_id=1377374192]
 
@@ -186,3 +179,29 @@ metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
 [node name="HabilityWalk" type="Node" parent="dados/Habilidades" unique_id=1794892081]
 script = ExtResource("12_6euhf")
 metadata/_custom_type_script = "uid://dju6saw4o5lqe"
+
+[node name="HabilityAttack" type="Node" parent="dados/Habilidades" unique_id=1134195105]
+script = ExtResource("15_bkl02")
+metadata/_custom_type_script = "uid://5q7v2d04meqn"
+
+[node name="OnScreen" type="Node2D" parent="." unique_id=1713376676]
+
+[node name="OnScreenLeft" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=890488261]
+unique_name_in_owner = true
+position = Vector2(-110, -120)
+rect = Rect2(97, 97, 3, 3)
+
+[node name="OnScreenRight" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=1844038311]
+unique_name_in_owner = true
+position = Vector2(3, -30)
+rect = Rect2(7, 7, 3, 3)
+
+[node name="OnScreenUp" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=379490949]
+unique_name_in_owner = true
+position = Vector2(-9, -60)
+rect = Rect2(7, 7, 3, 3)
+
+[node name="OnScreenDown" type="VisibleOnScreenNotifier2D" parent="OnScreen" unique_id=1093437423]
+unique_name_in_owner = true
+position = Vector2(-9, -3)
+rect = Rect2(7, 7, 3, 3)
