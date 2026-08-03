@@ -20,11 +20,13 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if decrease_over_time:
+		print("Stamina Decreasing...")
+		print(actual_stamina)
 		actual_stamina -= decrease_amount * delta
 		if actual_stamina <= 0:
 			actual_stamina = 0
 			decrease_over_time = false
-			event_bus.out_of_stamina.emit(Response.FAILED)
+			event_bus.out_of_stamina.emit(Response.FAILED, {})
 			return
 		
 	if actual_stamina < max_stamina:
@@ -32,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_event_bus_stamina_change_request(request: StaminaRequestDTO, _kwargs: Dictionary) -> void:
-	match request.request:
+	match request.type:
 		StaminaRequests.DECREASE_OVER_TIME:
 			decrease_over_time = true
 			decrease_amount = request.amount

@@ -7,8 +7,11 @@
 class_name EventBus extends Node2D
 
 # Sinais de Request (kwargs serve para logging e debug)
-signal velocity_change_request(request: StringName, kwargs: Dictionary[Variant,Variant])
+signal velocity_change_request(request: VelocityRequestDTO, kwargs: Dictionary[Variant,Variant])
+
 signal stamina_change_request(request: StaminaRequestDTO, kwargs: Dictionary[Variant,Variant])
+signal walk_lock_request(kwargs: Dictionary[Variant,Variant])
+signal walk_unlock_request(kwargs: Dictionary[Variant,Variant])
 
 
 # Sinais de Output
@@ -16,3 +19,4 @@ signal hability_status(response: String, kwargs: Dictionary[Variant,Variant])
 signal out_of_stamina(response: String, kwargs: Dictionary[Variant,Variant])
 signal state_changed(state_name: String, kwargs: Dictionary[Variant,Variant])
 signal velocity_changed(value: Vector2, kwargs: Dictionary[Variant,Variant])
+signal action_state_changed(state_name: String, kwargs: Dictionary[Variant,Variant])

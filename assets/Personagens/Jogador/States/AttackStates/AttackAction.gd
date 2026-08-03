@@ -1,4 +1,4 @@
-class_name AttackAction extends PlayerState
+class_name AttackAction extends State
 
 
 func enter(previous_state_path: String, data := {}) -> void:

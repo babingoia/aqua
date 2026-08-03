@@ -1,4 +1,4 @@
-class_name Walking extends PlayerState
+class_name Walking extends State
 
 
 func _ready() -> void:
@@ -13,12 +13,9 @@ func physics_update(_delta: float) -> void:
 		Controls.DOWN)
 		
 	if input_vec == Vector2.ZERO:
-		finished.emit(IDLE)
-	if Input.is_action_just_pressed(Controls.FIRST_HABILITY_INPUT):
-		finished.emit(FIRST_HABILITY)
+		finished.emit(PlayerState.IDLE)
 
 
 func enter(_previous_state_path: String, _data := {}) -> void:
-	print("Entrando em Walking")
 	event_bus.state_changed.emit(state_name, {})
 	

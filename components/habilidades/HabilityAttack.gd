@@ -1,7 +1,7 @@
 class_name HabilityAttack extends Hability
 
 func _ready() -> void:
-	hability_name = "attack"
+	hability_name = HabilityNames.ATTACK
 
 
 func execute() -> void:

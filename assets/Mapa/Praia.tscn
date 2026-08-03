@@ -39,7 +39,7 @@ limit_top = -360
 limit_right = 640
 limit_bottom = 360
 editor_draw_limits = true
-first_target = NodePath("../Objects/Sprite")
+first_target = NodePath("../Objects/Player")
 second_target = NodePath("../Objects/Concha")
 zoom_smothness = 10.0
 move_speed = 2.0
@@ -137,7 +137,7 @@ visible = false
 build_mode = 1
 polygon = PackedVector2Array(-640, -360, -640, 360, 640, 360, 640, -360)
 
-[node name="Sprite" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
+[node name="Player" parent="Objects" unique_id=527051746 instance=ExtResource("8_s6v1p")]
 position = Vector2(-148, 241)
 
 [node name="Concha" parent="Objects" unique_id=741582649 instance=ExtResource("12_jv64s")]

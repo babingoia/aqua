@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="8_ajy2y"]
 [ext_resource type="Script" uid="uid://c8bi4l82a21an" path="res://assets/Personagens/Jogador/States/AttackStates/AttackAction.gd" id="8_bkl02"]
 [ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="9_bug2i"]
+[ext_resource type="Script" uid="uid://ca7yp78tefryh" path="res://assets/Personagens/Jogador/States/MovementStates/Surf.gd" id="9_i1tck"]
 [ext_resource type="Script" uid="uid://dju6saw4o5lqe" path="res://components/Walk.gd" id="12_6euhf"]
 [ext_resource type="Script" uid="uid://c83lsq5throda" path="res://assets/Personagens/Jogador/States/AttackStates/IdleAction.gd" id="13_p3sjh"]
 [ext_resource type="Script" uid="uid://cbsijyyx6dhbv" path="res://components/habilidades/HabilityManager.gd" id="14_xstrf"]
@@ -84,7 +85,7 @@ _data = {
 &"idle": SubResource("Animation_cmw62")
 }
 
-[node name="Sprite" type="CharacterBody2D" unique_id=1210719859 node_paths=PackedStringArray("action_state_machine", "movement_state_machine")]
+[node name="Player" type="CharacterBody2D" unique_id=1210719859 node_paths=PackedStringArray("action_state_machine", "movement_state_machine")]
 script = ExtResource("1_j2hai")
 action_state_machine = NodePath("EventBus/ActionStateMachine")
 movement_state_machine = NodePath("EventBus/MovementStateMachine")
@@ -124,19 +125,27 @@ metadata/_custom_type_script = "uid://d2at0ak7tkxea"
 
 [node name="ActionStateMachine" type="Node" parent="EventBus" unique_id=1886041165 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_5481f")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Idle_Action")
 metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
 
-[node name="Idle" type="Node" parent="EventBus/ActionStateMachine" unique_id=1642116319]
+[node name="Idle_Action" type="Node" parent="EventBus/ActionStateMachine" unique_id=1642116319 node_paths=PackedStringArray("event_bus")]
 script = ExtResource("13_p3sjh")
+event_bus = NodePath("../..")
 
-[node name="Attack" type="Node" parent="EventBus/ActionStateMachine" unique_id=160014024]
+[node name="Attack" type="Node" parent="EventBus/ActionStateMachine" unique_id=160014024 node_paths=PackedStringArray("event_bus")]
 script = ExtResource("8_bkl02")
+event_bus = NodePath("../..")
+
+[node name="FirstHability" type="Node" parent="EventBus/ActionStateMachine" unique_id=792670844 node_paths=PackedStringArray("event_bus")]
+script = ExtResource("9_i1tck")
+event_bus = NodePath("../..")
+metadata/_custom_type_script = "uid://ca7yp78tefryh"
 
 [node name="Components" type="Node2D" parent="EventBus" unique_id=1377374192]
 
-[node name="Velocidade" type="Node" parent="EventBus/Components" unique_id=2114549722 node_paths=PackedStringArray("event_bus")]
+[node name="Velocidade" type="Node" parent="EventBus/Components" unique_id=2114549722 node_paths=PackedStringArray("target", "event_bus")]
 script = ExtResource("6_cmw62")
+target = NodePath("../../..")
 base_velocity = 100.0
 event_bus = NodePath("../..")
 metadata/_custom_type_script = "uid://lj8mw8m4ro3y"
@@ -149,7 +158,7 @@ metadata/_custom_type_script = "uid://c13d1l2ij0mkb"
 [node name="Stamina" type="Node" parent="EventBus/Components" unique_id=199306194 node_paths=PackedStringArray("event_bus")]
 script = ExtResource("8_ajy2y")
 event_bus = NodePath("../..")
-actual_stamina = 1000.0
+actual_stamina = 100.0
 regen_rate = 10.0
 metadata/_custom_type_script = "uid://c8cg80vmv3go2"
 
@@ -157,24 +166,31 @@ metadata/_custom_type_script = "uid://c8cg80vmv3go2"
 script = ExtResource("9_bug2i")
 metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
 
-[node name="Walk" type="Node" parent="EventBus/Components" unique_id=1794892081 node_paths=PackedStringArray("event_bus", "target")]
+[node name="Walk" type="Node" parent="EventBus/Components" unique_id=1794892081 node_paths=PackedStringArray("event_bus")]
 script = ExtResource("12_6euhf")
 event_bus = NodePath("../..")
-target = NodePath("../../..")
 metadata/_custom_type_script = "uid://dju6saw4o5lqe"
 
-[node name="Habilidades" type="Node2D" parent="EventBus" unique_id=514290851]
+[node name="Habilidades" type="Node2D" parent="EventBus" unique_id=514290851 node_paths=PackedStringArray("event_bus", "movement_state_machine", "action_state_machine", "first_hability")]
 position = Vector2(-0.22400093, 0)
 script = ExtResource("14_xstrf")
+event_bus = NodePath("..")
+movement_state_machine = NodePath("../MovementStateMachine")
+action_state_machine = NodePath("../ActionStateMachine")
+first_hability = NodePath("HabilitySurf")
 
 [node name="HabilityAttack" type="Node" parent="EventBus/Habilidades" unique_id=1134195105]
 script = ExtResource("15_bkl02")
 metadata/_custom_type_script = "uid://5q7v2d04meqn"
 
-[node name="HabilitySurf" type="Node" parent="EventBus/Habilidades" unique_id=166534084 node_paths=PackedStringArray("target")]
+[node name="HabilitySurf" type="Node" parent="EventBus/Habilidades" unique_id=166534084 node_paths=PackedStringArray("target", "event_bus")]
 unique_name_in_owner = true
 script = ExtResource("1_4td50")
+velocity_multiplier = 0.5
+turn_speed = 0.5
 target = NodePath("../../..")
+cost = 20.0
+event_bus = NodePath("../..")
 metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
 
 [node name="OnScreen" type="Node2D" parent="." unique_id=1713376676]
@@ -199,8 +215,14 @@ unique_name_in_owner = true
 position = Vector2(-9, -3)
 rect = Rect2(7, 7, 3, 3)
 
+[connection signal="action_state_changed" from="EventBus" to="EventBus/Habilidades" method="_on_event_bus_action_state_changed"]
+[connection signal="out_of_stamina" from="EventBus" to="EventBus/Habilidades" method="_on_event_bus_out_of_stamina"]
+[connection signal="out_of_stamina" from="EventBus" to="EventBus/ActionStateMachine/FirstHability" method="_on_event_bus_out_of_stamina"]
 [connection signal="stamina_change_request" from="EventBus" to="EventBus/Components/Stamina" method="_on_event_bus_stamina_change_request"]
 [connection signal="state_changed" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_state_changed"]
+[connection signal="state_changed" from="EventBus" to="EventBus/Habilidades" method="_on_event_bus_state_changed"]
 [connection signal="velocity_change_request" from="EventBus" to="EventBus/Components/Velocidade" method="_on_event_bus_velocity_change_request"]
 [connection signal="velocity_changed" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_velocity_changed"]
 [connection signal="velocity_changed" from="EventBus" to="EventBus/Habilidades/HabilitySurf" method="_on_event_bus_velocity_changed"]
+[connection signal="walk_lock_request" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_walk_lock_request"]
+[connection signal="walk_unlock_request" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_walk_unlock_request"]
