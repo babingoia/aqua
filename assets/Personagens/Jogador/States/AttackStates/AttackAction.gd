@@ -6,16 +6,7 @@ func enter(previous_state_path: String, data := {}) -> void:
 
 
 func update(_delta: float) -> void:
-	var response: HabilityResponse = hability.execute(character, _delta)
-	
-	match response:
-		Response.RUNNING:
-			pass
-		_:
-			hability.finish(character, _delta)
-			finished.emit(IDLE)
-			
-		
+	pass
 
 func physics_update(_delta: float) -> void:
 	pass

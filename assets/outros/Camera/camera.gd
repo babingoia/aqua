@@ -1,10 +1,10 @@
 extends Camera2D
 
-@export var player: Character
-@export var concha: Character
+@export var first_target: Node2D
+@export var second_target: Node2D
 
-var player_na_tela: Dictionary[String, VisibleOnScreenNotifier2D]
-var concha_na_tela: Dictionary[String, VisibleOnScreenNotifier2D]
+var first_target_notifier: Dictionary[String, VisibleOnScreenNotifier2D]
+var second_target_notifier: Dictionary[String, VisibleOnScreenNotifier2D]
 
 @export var zoom_smothness: float = 5
 @export var move_speed: float = 0.5
@@ -22,22 +22,20 @@ var vec_zoom_speed: Vector2
 func _ready() -> void:
 	await owner.ready
 	
-	player_na_tela = {
-	"left": player.get_node("%OnScreenLeft"),
-	"right": player.get_node("%OnScreenRight"),
-	"up": player.get_node("%OnScreenUp"),
-	"down": player.get_node("%OnScreenDown")
+	first_target_notifier = {
+	"left": first_target.get_node("%OnScreenLeft"),
+	"right": first_target.get_node("%OnScreenRight"),
+	"up": first_target.get_node("%OnScreenUp"),
+	"down": first_target.get_node("%OnScreenDown")
 }
-	concha_na_tela = {
-	"left": concha.get_node("%OnScreenLeft"),
-	"right": concha.get_node("%OnScreenRight"),
-	"up": concha.get_node("%OnScreenUp"),
-	"down": concha.get_node("%OnScreenDown")
+	second_target_notifier = {
+	"left": second_target.get_node("%OnScreenLeft"),
+	"right": second_target.get_node("%OnScreenRight"),
+	"up": second_target.get_node("%OnScreenUp"),
+	"down": second_target.get_node("%OnScreenDown")
 }
 
 	zoom = Vector2(0.4, 0.4)
-	
-	print(player_na_tela, concha_na_tela)
 	
 	vec_max_zoom = Vector2(max_zoom, max_zoom)
 	vec_min_zoom = Vector2(min_zoom, min_zoom)
@@ -58,7 +56,7 @@ func is_on_screen_dict(target: Dictionary[String, VisibleOnScreenNotifier2D]) ->
 
 
 func _input(event: InputEvent) -> void:
-	if is_on_screen_dict(player_na_tela) and is_on_screen_dict(concha_na_tela):
+	if is_on_screen_dict(first_target_notifier) and is_on_screen_dict(second_target_notifier):
 		 
 		if event.is_action_pressed(Controls.ZOOM_IN) and zoom < vec_max_zoom:
 			zoom_target = clamp(zoom + vec_zoom_speed, vec_min_zoom, vec_max_zoom)
@@ -68,18 +66,18 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	if !player or !concha:
+	if !first_target or !second_target:
 		return
 	
 	var center: Vector2 = Vector2.ZERO
 	
-	center += concha.global_position
-	center += player.global_position
+	center += first_target.global_position
+	center += second_target.global_position
 	center /= 2
 	
 	global_position = lerp(global_position, center, move_speed * delta)
 	
-	if !is_on_screen_dict(player_na_tela) or !is_on_screen_dict(concha_na_tela):
+	if !is_on_screen_dict(first_target_notifier) or !is_on_screen_dict(second_target_notifier):
 		zoom_target = clamp(zoom - vec_zoom_speed, vec_min_zoom, vec_max_zoom)
 
 	if zoom != zoom_target:

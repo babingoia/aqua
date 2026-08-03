@@ -32,15 +32,15 @@
 [node name="Outros" type="Node2D" parent="." unique_id=1138334584]
 z_index = -1
 
-[node name="Camera" parent="Outros" unique_id=1529914638 node_paths=PackedStringArray("player", "concha") instance=ExtResource("9_rscwd")]
+[node name="Camera" parent="." unique_id=1529914638 node_paths=PackedStringArray("first_target", "second_target") instance=ExtResource("9_rscwd")]
 position = Vector2(25, 21)
 limit_left = -640
 limit_top = -360
 limit_right = 640
 limit_bottom = 360
 editor_draw_limits = true
-player = NodePath("../../Objects/Sprite")
-concha = NodePath("../../Objects/Sprite")
+first_target = NodePath("../Objects/Sprite")
+second_target = NodePath("../Objects/Concha")
 zoom_smothness = 10.0
 move_speed = 2.0
 min_zoom = 1.5

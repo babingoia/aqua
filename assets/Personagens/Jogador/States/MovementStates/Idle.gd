@@ -1,15 +1,25 @@
 class_name Idle extends PlayerState
 
 
+func _ready() -> void:
+	state_name = 'Idle'
+
+
 func physics_update(_delta: float) -> void:
-	if Input.is_action_pressed(Controls.UP) or Input.is_action_pressed(Controls.DOWN) or Input.is_action_pressed(Controls.RIGHT) or Input.is_action_pressed(Controls.LEFT):
+	var input_vec := Input.get_vector(
+		Controls.LEFT,
+		Controls.RIGHT,
+		Controls.UP,
+		Controls.DOWN)
+		
+	if input_vec != Vector2.ZERO:
 		finished.emit(WALKING)
 	elif Input.is_action_pressed(Controls.FIRST_HABILITY_INPUT):
-		finished.emit(first_hability)
+		finished.emit(FIRST_HABILITY)
 	
 
-func enter(previous_state_path: String, data := {}) -> void:
-	# print("Entrando em Idle")
-	character.velocity.x = 0.0
-	character.animation_player.play(ANIM_IDLE)
+func enter(_previous_state_path: String, _data := {}) -> void:
+	print("Entrando em Idle")
+	event_bus.state_changed.emit(state_name, {})
+	event_bus.velocity_change_request.emit(VelocityRequests.ZERO, {})
 	

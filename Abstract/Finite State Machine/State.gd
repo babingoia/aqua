@@ -1,8 +1,8 @@
 # Classe abstrata de Estado
 class_name State extends Node
 
-@export var hability: Hability = NullHability.new()
-@export var character: Character
+@export var event_bus: EventBus
+var state_name: String
 
 # Ativada quando o estado é finalizado
 signal finished(next_state_path: String, data: Dictionary);

@@ -1,17 +1,14 @@
 class_name Hability extends Node
+## Classe abstrata hability, um comando que executa lógica \n
+## do que o jogador pode fazer.
 
-#Info
-var state_name: String
-var anim_name: String
-@export var cost: float
-var cost_type: String
-
+@export var event_bus: EventBus
+var hability_name: String
 
 
-func execute(character: Character, delta: float) -> HabilityResponse:
-	assert(false, "execute() não implementado em " + get_script().resource_path)
-	return HabilityResponse.new()  # necessário pro type checker
+func execute() -> void:
+	assert(false, "execute() não implementado em " + get_script().resource_path)  # necessário pro type checker
 
 
-func finish(character: Character, delta: float) -> void:
+func finish() -> void:
 	assert(false, "finish() não implementado em " + get_script().resource_path)
