@@ -1,31 +1,30 @@
-# Classe abstrata de Estado
+## Classe abstrata de estado. Gerencia a lógica de transição entre estados
 class_name State extends Node
 
-@export var event_bus: EventBus
-var state_name: String
+var state_name: StringName
 
-# Ativada quando o estado é finalizado
+## Emitido quando o estado é finalizado
 signal finished(next_state_path: String, data: Dictionary);
 
-# Chamada pela maquina de estados para controlar inputs
+## Chamada pela maquina de estados para controlar inputs
 func handle_input(_event: InputEvent) -> void:
 	pass
 	
-# Chamada pela maquina de estados no game_loop
+## Chamada pela maquina de estados no game_loop
 func update(_delta: float) -> void:
 	pass
 	
-# Chamada pela maquina de estados no tick de física
+## Chamada pela maquina de estados no tick de física
 func physics_update(_delta: float) -> void:
 	pass
 
-# Chamada pela maquina de estados quando o estado é inicializado
-# pela primeira vez
+## Chamada pela maquina de estados quando o estado é inicializado
+## pela primeira vez
 func enter(previous_state_path: String, data := {}) -> void:
 	#print("Entrando no estado:" + str(get_path()))
 	pass
 	
-# Chamada pela maquina de estados antes do estado ser trocado
+## Chamada pela maquina de estados antes do estado ser trocado
 func exit() -> void:
 	#print("Saindo do estado:" + str(get_path()))
 	pass

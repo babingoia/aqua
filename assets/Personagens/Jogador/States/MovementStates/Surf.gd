@@ -1,4 +1,5 @@
-## Estado da ação de surf.
+## Estado da ação de surf. Entra em Idle se a stamina acabar ou
+## se o jogador soltar o botão de ação
 class_name Surf extends State
 
 func _ready() -> void:
@@ -7,13 +8,16 @@ func _ready() -> void:
 
 func physics_update(_delta: float) -> void:	
 	if Input.is_action_just_released(Controls.FIRST_HABILITY_INPUT):
-		finished.emit(PlayerState.IDLE_ACTION)
+		finished.emit(PlayerState.IDLE)
+
+
+func _on_relay_out_of_stamina() -> void:
+	finished.emit(PlayerState.IDLE)
 
 
 func enter(_previous_state_path: String, _data := {}) -> void:
 	print("Entrando em surf...")
-	event_bus.action_state_changed.emit(state_name, {})
 
 
-func _on_event_bus_out_of_stamina(response: String, _kwargs: Dictionary) -> void:
-	finished.emit(PlayerState.IDLE_ACTION)
+func exit() -> void:
+	print("Saindo do surf...")

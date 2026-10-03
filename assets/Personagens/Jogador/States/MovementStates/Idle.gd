@@ -2,11 +2,8 @@
 ## transições.
 class_name Idle extends State
 
-var velocity_request: VelocityRequestDTO = VelocityRequestDTO.new()
-
-
 func _ready() -> void:
-	state_name = 'Idle'
+	state_name = PlayerState.IDLE
 
 
 func physics_update(_delta: float) -> void:
@@ -18,11 +15,8 @@ func physics_update(_delta: float) -> void:
 		
 	if input_vec != Vector2.ZERO:
 		finished.emit(PlayerState.WALKING)
-	
 
-func enter(_previous_state_path: String, _data := {}) -> void:
-	event_bus.state_changed.emit(state_name, {})
-	
-	velocity_request.type = VelocityRequests.ZERO
-	event_bus.velocity_change_request.emit(velocity_request, {})
-	
+
+func _on_relay_active_hability_changed(hability_name: StringName) -> void:
+		if hability_name == PlayerState.SURF:
+			finished.emit(PlayerState.SURF)

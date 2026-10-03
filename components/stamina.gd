@@ -1,17 +1,17 @@
-## Componente que gerencia a stamina.
+## Componente puro que gerencia a stamina.
 class_name Stamina extends Node
 
+#Signals
+signal out_of_stamina()
+
 # Valores internos
-@export var event_bus: EventBus
 @export var actual_stamina: float
-
-var max_stamina: float
-
-var decrease_amount: float
 @export var regen_rate: float
+var max_stamina: float
+var decrease_amount: float
 
 # Triggers
-var decrease_over_time: bool = false
+var is_decreasing: bool = false
 
 
 func _ready() -> void:
@@ -23,22 +23,21 @@ func _physics_process(delta: float) -> void:
 		print("Stamina Decreasing...")
 		print(actual_stamina)
 		actual_stamina -= decrease_amount * delta
-		if actual_stamina <= 0:
+	
+	if actual_stamina <= 0:
 			actual_stamina = 0
-			decrease_over_time = false
-			event_bus.out_of_stamina.emit(Response.FAILED, {})
+			is_decreasing = false
+			out_of_stamina.emit()
 			return
 		
 	if actual_stamina < max_stamina:
 		actual_stamina += regen_rate * delta
 
 
-func _on_event_bus_stamina_change_request(request: StaminaRequestDTO, _kwargs: Dictionary) -> void:
-	match request.type:
-		StaminaRequests.DECREASE_OVER_TIME:
-			decrease_over_time = true
-			decrease_amount = request.amount
-		StaminaRequests.RESET:
-			decrease_over_time = false
-		_:
-			push_warning("Requisição para Stamina não identificada")
+func decrease_over_time(amount: float) -> void:
+	is_decreasing = true
+	decrease_amount = amount
+
+
+func reset() -> void:
+	is_decreasing = false

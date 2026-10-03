@@ -1,8 +1,7 @@
 class_name Walking extends State
 
-
 func _ready() -> void:
-	state_name = "Walking"
+	state_name = PlayerState.WALKING
 
 
 func physics_update(_delta: float) -> void:
@@ -16,6 +15,6 @@ func physics_update(_delta: float) -> void:
 		finished.emit(PlayerState.IDLE)
 
 
-func enter(_previous_state_path: String, _data := {}) -> void:
-	event_bus.state_changed.emit(state_name, {})
-	
+func _on_relay_active_hability_changed(hability_name: StringName) -> void:
+	if hability_name == PlayerState.SURF:
+		finished.emit(PlayerState.SURF)

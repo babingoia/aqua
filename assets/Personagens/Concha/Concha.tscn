@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqogjht13o84q"]
 
 [ext_resource type="Texture2D" uid="uid://byekdrmffivvn" path="res://spr/shell.png" id="2_qyot8"]
-[ext_resource type="Script" uid="uid://bda6qkq8peaoo" path="res://Abstract/EventBus.gd" id="2_sg2f6"]
+[ext_resource type="Script" uid="uid://bda6qkq8peaoo" path="res://assets/Personagens/Jogador/PlayerRelay.gd" id="2_sg2f6"]
 [ext_resource type="Script" uid="uid://c0xbsf22mkuqm" path="res://Abstract/Finite State Machine/StateMachine.gd" id="3_k30rj"]
 [ext_resource type="Script" uid="uid://di2unrk7y5yhc" path="res://assets/Personagens/Concha/States/Idle.gd" id="3_le10y"]
 [ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="6_le10y"]

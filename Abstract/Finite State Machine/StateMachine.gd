@@ -4,6 +4,9 @@ class_name StateMachine extends Node
 # Estado inicial da Máquina de Estados
 @export var initial_state: State = null 
 
+# Sinal emitido na troca de estados.
+signal state_changed(next_state_name: StateDTO)
+
 # Estado atual da máquina de estados
 @onready var state: State = (func get_initial_state() -> State:
 	return initial_state if initial_state != null else get_child(0)
@@ -28,6 +31,9 @@ func _transition_to_next_state(target_state_path: String, data: Dictionary = {})
 	state.exit()
 	state = get_node(target_state_path)
 	state.enter(previous_state_path, data)
+	var stateDTO: StateDTO = StateDTO.new(state)
+	state_changed.emit(stateDTO)
+
 
 # Passa pra frente o loop do jogo pro estado
 func _unhandled_input(event: InputEvent) -> void:

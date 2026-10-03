@@ -1,22 +1,20 @@
 [gd_scene format=3 uid="uid://dl3guhty12atl"]
 
-[ext_resource type="Script" uid="uid://cef4hhvtdpx3a" path="res://components/habilidades/HabilitySurf.gd" id="1_4td50"]
 [ext_resource type="Script" uid="uid://kyn5isk7mtst" path="res://assets/Personagens/Jogador/Player.gd" id="1_j2hai"]
 [ext_resource type="Script" uid="uid://c0xbsf22mkuqm" path="res://Abstract/Finite State Machine/StateMachine.gd" id="2_5481f"]
 [ext_resource type="Texture2D" uid="uid://ccoejg3oa2uq2" path="res://spr/mari.png" id="2_ajy2y"]
 [ext_resource type="Script" uid="uid://c8ufbt2n340sr" path="res://assets/Personagens/Jogador/States/MovementStates/Idle.gd" id="3_bsmxe"]
-[ext_resource type="Script" uid="uid://bda6qkq8peaoo" path="res://Abstract/EventBus.gd" id="3_xstrf"]
+[ext_resource type="Script" uid="uid://bda6qkq8peaoo" path="res://assets/Personagens/Jogador/PlayerRelay.gd" id="3_xstrf"]
 [ext_resource type="Script" uid="uid://d2at0ak7tkxea" path="res://assets/Personagens/Jogador/States/MovementStates/Walking.gd" id="4_c51ww"]
-[ext_resource type="Script" uid="uid://lj8mw8m4ro3y" path="res://components/velocidade.gd" id="6_cmw62"]
-[ext_resource type="Script" uid="uid://c13d1l2ij0mkb" path="res://components/vida.gd" id="7_4td50"]
-[ext_resource type="Script" uid="uid://c8cg80vmv3go2" path="res://components/stamina.gd" id="8_ajy2y"]
+[ext_resource type="Script" uid="uid://e1l85xiow31h" path="res://assets/Personagens/Jogador/adapters/PlayerWalkAdapter.gd" id="6_bkl02"]
 [ext_resource type="Script" uid="uid://c8bi4l82a21an" path="res://assets/Personagens/Jogador/States/AttackStates/AttackAction.gd" id="8_bkl02"]
-[ext_resource type="Script" uid="uid://dso3jlrsyo3c2" path="res://components/almas.gd" id="9_bug2i"]
 [ext_resource type="Script" uid="uid://ca7yp78tefryh" path="res://assets/Personagens/Jogador/States/MovementStates/Surf.gd" id="9_i1tck"]
-[ext_resource type="Script" uid="uid://dju6saw4o5lqe" path="res://components/Walk.gd" id="12_6euhf"]
+[ext_resource type="Script" uid="uid://b4ca6btacli5l" path="res://assets/Personagens/Jogador/adapters/PlayerVelocityAdapter.gd" id="10_bkl02"]
+[ext_resource type="Script" uid="uid://cgois63wv44cx" path="res://assets/Personagens/Jogador/adapters/PlayerStaminaAdapter.gd" id="11_bkl02"]
 [ext_resource type="Script" uid="uid://c83lsq5throda" path="res://assets/Personagens/Jogador/States/AttackStates/IdleAction.gd" id="13_p3sjh"]
 [ext_resource type="Script" uid="uid://cbsijyyx6dhbv" path="res://components/habilidades/HabilityManager.gd" id="14_xstrf"]
 [ext_resource type="Script" uid="uid://5q7v2d04meqn" path="res://components/habilidades/HabilityAttack.gd" id="15_bkl02"]
+[ext_resource type="Script" uid="uid://dcdclnn0np5tx" path="res://assets/Personagens/Jogador/adapters/PlayerSurfAdapter.gd" id="15_xstrf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bug2i"]
 atlas = ExtResource("2_ajy2y")
@@ -87,8 +85,8 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1210719859 node_paths=PackedStringArray("action_state_machine", "movement_state_machine")]
 script = ExtResource("1_j2hai")
-action_state_machine = NodePath("EventBus/ActionStateMachine")
-movement_state_machine = NodePath("EventBus/MovementStateMachine")
+action_state_machine = NodePath("Relay/ActionStateMachine")
+movement_state_machine = NodePath("Relay/MovementStateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1103833997]
 texture_filter = 1
@@ -103,95 +101,72 @@ shape = SubResource("RectangleShape2D_1rk6f")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1680384423]
 libraries/ = SubResource("AnimationLibrary_ajy2y")
 
-[node name="EventBus" type="Node2D" parent="." unique_id=688846010]
-position = Vector2(0.22400093, -23)
+[node name="Relay" type="Node" parent="." unique_id=21451971]
 script = ExtResource("3_xstrf")
-metadata/_custom_type_script = "uid://bda6qkq8peaoo"
 
-[node name="MovementStateMachine" type="Node" parent="EventBus" unique_id=306926093 node_paths=PackedStringArray("initial_state")]
+[node name="MovementStateMachine" type="Node" parent="Relay" unique_id=306926093 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_5481f")
 initial_state = NodePath("Idle")
 metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
 
-[node name="Idle" type="Node" parent="EventBus/MovementStateMachine" unique_id=1659282666 node_paths=PackedStringArray("event_bus")]
+[node name="Idle" type="Node" parent="Relay/MovementStateMachine" unique_id=1659282666]
 script = ExtResource("3_bsmxe")
-event_bus = NodePath("../..")
 metadata/_custom_type_script = "uid://c8ufbt2n340sr"
 
-[node name="Walking" type="Node" parent="EventBus/MovementStateMachine" unique_id=1972147320 node_paths=PackedStringArray("event_bus")]
+[node name="Walking" type="Node" parent="Relay/MovementStateMachine" unique_id=1972147320]
 script = ExtResource("4_c51ww")
-event_bus = NodePath("../..")
 metadata/_custom_type_script = "uid://d2at0ak7tkxea"
 
-[node name="ActionStateMachine" type="Node" parent="EventBus" unique_id=1886041165 node_paths=PackedStringArray("initial_state")]
+[node name="Surf" type="Node" parent="Relay/MovementStateMachine" unique_id=757945625]
+script = ExtResource("9_i1tck")
+metadata/_custom_type_script = "uid://ca7yp78tefryh"
+
+[node name="ActionStateMachine" type="Node" parent="Relay" unique_id=1886041165 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_5481f")
 initial_state = NodePath("Idle_Action")
 metadata/_custom_type_script = "uid://c0xbsf22mkuqm"
 
-[node name="Idle_Action" type="Node" parent="EventBus/ActionStateMachine" unique_id=1642116319 node_paths=PackedStringArray("event_bus")]
+[node name="Idle_Action" type="Node" parent="Relay/ActionStateMachine" unique_id=1642116319]
 script = ExtResource("13_p3sjh")
-event_bus = NodePath("../..")
 
-[node name="Attack" type="Node" parent="EventBus/ActionStateMachine" unique_id=160014024 node_paths=PackedStringArray("event_bus")]
+[node name="Attack" type="Node" parent="Relay/ActionStateMachine" unique_id=160014024]
 script = ExtResource("8_bkl02")
-event_bus = NodePath("../..")
 
-[node name="FirstHability" type="Node" parent="EventBus/ActionStateMachine" unique_id=792670844 node_paths=PackedStringArray("event_bus")]
+[node name="FirstHability" type="Node" parent="Relay/ActionStateMachine" unique_id=792670844]
 script = ExtResource("9_i1tck")
-event_bus = NodePath("../..")
 metadata/_custom_type_script = "uid://ca7yp78tefryh"
 
-[node name="Components" type="Node2D" parent="EventBus" unique_id=1377374192]
+[node name="Components" type="Node2D" parent="Relay" unique_id=1377374192]
 
-[node name="Velocidade" type="Node" parent="EventBus/Components" unique_id=2114549722 node_paths=PackedStringArray("target", "event_bus")]
-script = ExtResource("6_cmw62")
+[node name="Velocidade" type="Node" parent="Relay/Components" unique_id=2114549722 node_paths=PackedStringArray("target")]
+script = ExtResource("10_bkl02")
 target = NodePath("../../..")
 base_velocity = 100.0
-event_bus = NodePath("../..")
-metadata/_custom_type_script = "uid://lj8mw8m4ro3y"
 
-[node name="Vida" type="Node" parent="EventBus/Components" unique_id=762786041]
-script = ExtResource("7_4td50")
-vida_maxima = 100
-metadata/_custom_type_script = "uid://c13d1l2ij0mkb"
-
-[node name="Stamina" type="Node" parent="EventBus/Components" unique_id=199306194 node_paths=PackedStringArray("event_bus")]
-script = ExtResource("8_ajy2y")
-event_bus = NodePath("../..")
+[node name="Stamina" type="Node" parent="Relay/Components" unique_id=199306194 node_paths=PackedStringArray("relay")]
+script = ExtResource("11_bkl02")
+relay = NodePath("../..")
 actual_stamina = 100.0
 regen_rate = 10.0
-metadata/_custom_type_script = "uid://c8cg80vmv3go2"
 
-[node name="Almas" type="Node" parent="EventBus/Components" unique_id=2076724995]
-script = ExtResource("9_bug2i")
-metadata/_custom_type_script = "uid://dso3jlrsyo3c2"
+[node name="Walk" type="Node" parent="Relay/Components" unique_id=1794892081 node_paths=PackedStringArray("relay")]
+script = ExtResource("6_bkl02")
+relay = NodePath("../..")
 
-[node name="Walk" type="Node" parent="EventBus/Components" unique_id=1794892081 node_paths=PackedStringArray("event_bus")]
-script = ExtResource("12_6euhf")
-event_bus = NodePath("../..")
-metadata/_custom_type_script = "uid://dju6saw4o5lqe"
-
-[node name="Habilidades" type="Node2D" parent="EventBus" unique_id=514290851 node_paths=PackedStringArray("event_bus", "movement_state_machine", "action_state_machine", "first_hability")]
+[node name="Habilidades" type="Node2D" parent="Relay" unique_id=514290851 node_paths=PackedStringArray("relay", "movement_state_machine", "action_state_machine", "first_hability")]
 position = Vector2(-0.22400093, 0)
 script = ExtResource("14_xstrf")
-event_bus = NodePath("..")
+relay = NodePath("..")
 movement_state_machine = NodePath("../MovementStateMachine")
 action_state_machine = NodePath("../ActionStateMachine")
 first_hability = NodePath("HabilitySurf")
 
-[node name="HabilityAttack" type="Node" parent="EventBus/Habilidades" unique_id=1134195105]
+[node name="HabilityAttack" type="Node" parent="Relay/Habilidades" unique_id=1134195105]
 script = ExtResource("15_bkl02")
-metadata/_custom_type_script = "uid://5q7v2d04meqn"
 
-[node name="HabilitySurf" type="Node" parent="EventBus/Habilidades" unique_id=166534084 node_paths=PackedStringArray("target", "event_bus")]
+[node name="HabilitySurf" type="Node" parent="Relay/Habilidades" unique_id=166534084]
 unique_name_in_owner = true
-script = ExtResource("1_4td50")
-velocity_multiplier = 0.5
-turn_speed = 0.5
-target = NodePath("../../..")
-cost = 20.0
-event_bus = NodePath("../..")
-metadata/_custom_type_script = "uid://cef4hhvtdpx3a"
+script = ExtResource("15_xstrf")
 
 [node name="OnScreen" type="Node2D" parent="." unique_id=1713376676]
 
@@ -215,14 +190,23 @@ unique_name_in_owner = true
 position = Vector2(-9, -3)
 rect = Rect2(7, 7, 3, 3)
 
-[connection signal="action_state_changed" from="EventBus" to="EventBus/Habilidades" method="_on_event_bus_action_state_changed"]
-[connection signal="out_of_stamina" from="EventBus" to="EventBus/Habilidades" method="_on_event_bus_out_of_stamina"]
-[connection signal="out_of_stamina" from="EventBus" to="EventBus/ActionStateMachine/FirstHability" method="_on_event_bus_out_of_stamina"]
-[connection signal="stamina_change_request" from="EventBus" to="EventBus/Components/Stamina" method="_on_event_bus_stamina_change_request"]
-[connection signal="state_changed" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_state_changed"]
-[connection signal="state_changed" from="EventBus" to="EventBus/Habilidades" method="_on_event_bus_state_changed"]
-[connection signal="velocity_change_request" from="EventBus" to="EventBus/Components/Velocidade" method="_on_event_bus_velocity_change_request"]
-[connection signal="velocity_changed" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_velocity_changed"]
-[connection signal="velocity_changed" from="EventBus" to="EventBus/Habilidades/HabilitySurf" method="_on_event_bus_velocity_changed"]
-[connection signal="walk_lock_request" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_walk_lock_request"]
-[connection signal="walk_unlock_request" from="EventBus" to="EventBus/Components/Walk" method="_on_event_bus_walk_unlock_request"]
+[connection signal="action_state_changed" from="Relay" to="Relay/Habilidades" method="_on_relay_action_state_changed"]
+[connection signal="active_hability_changed" from="Relay" to="Relay/MovementStateMachine/Idle" method="_on_relay_active_hability_changed"]
+[connection signal="active_hability_changed" from="Relay" to="Relay/MovementStateMachine/Walking" method="_on_relay_active_hability_changed"]
+[connection signal="modify_stamina" from="Relay" to="Relay/Components/Stamina" method="_on_relay_modify_stamina"]
+[connection signal="modify_velocity" from="Relay" to="Relay/Components/Velocidade" method="_on_relay_modify_velocity"]
+[connection signal="movement_state_changed" from="Relay" to="Relay/Habilidades" method="_on_relay_movement_state_changed"]
+[connection signal="out_of_stamina" from="Relay" to="Relay/MovementStateMachine/Surf" method="_on_relay_out_of_stamina"]
+[connection signal="state_changed" from="Relay/MovementStateMachine" to="Relay" method="_on_movement_state_machine_state_changed"]
+[connection signal="state_changed" from="Relay/ActionStateMachine" to="Relay" method="_on_action_state_machine_state_changed"]
+[connection signal="rotation_changed" from="Relay/Components/Velocidade" to="Relay" method="_on_velocidade_rotation_changed"]
+[connection signal="velocity_changed" from="Relay/Components/Velocidade" to="Relay" method="_on_velocidade_velocity_changed"]
+[connection signal="out_of_stamina" from="Relay/Components/Stamina" to="Relay" method="_on_stamina_out_of_stamina"]
+[connection signal="status" from="Relay/Components/Walk" to="Relay/Components/Walk" method="_on_status"]
+[connection signal="active_hability_changed" from="Relay/Habilidades" to="Relay" method="_on_habilidades_active_hability_changed"]
+[connection signal="modify_stamina" from="Relay/Habilidades/HabilitySurf" to="Relay" method="_on_hability_surf_modify_stamina"]
+[connection signal="modify_velocity" from="Relay/Habilidades/HabilitySurf" to="Relay" method="_on_hability_surf_modify_velocity"]
+[connection signal="rotation_changed" from="Relay/Habilidades/HabilitySurf" to="Relay/Habilidades/HabilitySurf" method="_on_rotation_changed"]
+[connection signal="status" from="Relay/Habilidades/HabilitySurf" to="Relay" method="_on_hability_surf_status"]
+[connection signal="status" from="Relay/Habilidades/HabilitySurf" to="Relay/Habilidades/HabilitySurf" method="_on_status"]
+[connection signal="velocity_changed" from="Relay/Habilidades/HabilitySurf" to="Relay/Habilidades/HabilitySurf" method="_on_velocity_changed"]

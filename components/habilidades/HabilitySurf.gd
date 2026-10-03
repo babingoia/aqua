@@ -1,89 +1,86 @@
+## Classe componente pura. Expõe métodos que podem ser sobrescritos depois
+## via adapters.
 ## Habilidade que trava o movimento em uma direção e adiciona curva suave com
-## aceleração tangente e centrípeta simulando um MCUV. Os inputs são dinânimos,
+## aceleração centrípeta simulando um MCU. Os inputs são dinânimos,
 ## fazendo com que a curva aconteça dependente da direção do movimento.
+## Classe responsavel somente pela mecânica do movimento, expondo atributos
+## de velocidade e rotação através de signals dinamicamente.
 class_name HabilitySurf extends Hability
 
+#Sinais
+signal status(response: String, kwargs: Dictionary)
+signal velocity_changed(value: Vector2, kwargs: Dictionary)
+signal rotation_changed(value: float, kwargs: Dictionary)
+
+#Exports
+@export var velocity: Vector2 = Vector2.ZERO:
+	set(new_value):
+		velocity = new_value
+		velocity_changed.emit(new_value, {})
 @export var velocity_multiplier: float
-@export var turn_speed: float
-@export var target: CharacterBody2D
-@export var cost: float
-@export var cooldown: float = 2
-var velocity_request: VelocityRequestDTO = VelocityRequestDTO.new()
-var cooldown_timer: Timer = Timer.new()
-var velocity: Vector2
-var is_axis_got: bool = false
-var input_direction_x: float
-var input_direction_y: float
+@export var rotation_speed: float
+
+#Variaveis internas
+var _is_direction_got: bool = false
+var _input_direction: Vector2
+var _rotation_direction: float:
+	set(new_value):
+		_rotation_direction = new_value
+		rotation_changed.emit(new_value, {})
 
 
 func _ready() -> void:
 	hability_name = HabilityNames.SURF
+
+
+## Método que define a rotação da habilidade através do Input do usuário.
+## Instrução de sobrescrita. 
+func _set_rotation() -> void:
+	if _input_direction.x != 0:
+		if Input.is_action_pressed(Controls.UP):
+			_rotation_direction = rotation_speed * _input_direction.x
+		elif Input.is_action_pressed(Controls.DOWN):
+			_rotation_direction = -rotation_speed * _input_direction.x
+				
+	if _input_direction.y != 0:
+		if Input.is_action_pressed(Controls.LEFT):
+			_rotation_direction = rotation_speed * _input_direction.x
+		elif Input.is_action_pressed(Controls.RIGHT):
+			_rotation_direction = -rotation_speed * _input_direction.x
+
+
+## Método que define a direção inicial que a força aponta. Pega a direção do
+## primeiro input e trava a escolha.
+## Instrução de sobrescita.
+func _get_direction() -> void:
+	_input_direction = Input.get_vector(
+		Controls.LEFT, 
+		Controls.RIGHT, 
+		Controls.UP, 
+		Controls.DOWN
+	)
 	
-	add_child(cooldown_timer)
-	cooldown_timer.wait_time = cooldown
-	cooldown_timer.one_shot = true
+	if _input_direction == Vector2.ZERO:
+		status.emit(Response.FAILED, {})
+		return
+		
+	_is_direction_got = true
 
 
+## Método do tipo RUNNING que exige execução contínua.
+## Inicia a execução da habilidade mas não contém lógica propriamente, apenas
+## uma sequência de métodos para serem executados e lógica imutável.
 func execute() -> void:
-	if not cooldown_timer.is_stopped():
-		return
-
-	#Movimentação
-	if is_axis_got == false:
-		print("Iniciando axis_got...")
-		input_direction_x = Input.get_axis(Controls.LEFT, Controls.RIGHT)
-		input_direction_y = Input.get_axis(Controls.UP, Controls.DOWN)
-		
-		velocity_request.type = VelocityRequests.RESET
-		event_bus.velocity_change_request.emit(velocity_request, {})
-		event_bus.walk_lock_request.emit({})
-		
-		var stamina_request = StaminaRequestDTO.new()
-		stamina_request.type = StaminaRequests.DECREASE_OVER_TIME
-		stamina_request.amount = cost
-		event_bus.stamina_change_request.emit(stamina_request, {})
-		
-		is_axis_got = true
-	
-	elif input_direction_x == 0 and input_direction_y == 0:
-		print("Habilidade Falhou...")
-		event_bus.hability_status.emit(Response.FAILED, {})
-		
-		var request = StaminaRequestDTO.new()
-		request.type = StaminaRequests.RESET
-		event_bus.stamina_change_request.emit(request, {})
-		
-		return
-	
+	if _is_direction_got == false:
+		_get_direction()
 	else:
-		
-		if Input.is_action_pressed(Controls.UP) and input_direction_x != 0:
-			input_direction_y -= turn_speed
-		if Input.is_action_pressed(Controls.DOWN) and input_direction_x != 0:
-			input_direction_y += turn_speed
-		if Input.is_action_pressed(Controls.RIGHT) and input_direction_y != 0:
-			input_direction_x += turn_speed
-		if Input.is_action_pressed(Controls.LEFT) and input_direction_y != 0:
-			input_direction_x -= turn_speed
-	
-	target.velocity.x = velocity.x + velocity_multiplier * input_direction_x
-	target.velocity.y = velocity.y + velocity_multiplier * input_direction_y
-	
-	target.move_and_slide()
+		_set_rotation()
+		status.emit(Response.RUNNING, {})
 
 
+## Termina de forma segura a execução da habilidade, resetando efeitos colaterais.
+## Pode ser sobrescrito mas com Super necessário.
 func finish() -> void:
-	is_axis_got = false
-	input_direction_x = 0
-	input_direction_y = 0
-	
-	var stamina_request = StaminaRequestDTO.new()
-	stamina_request.type = StaminaRequests.RESET
-	event_bus.stamina_change_request.emit(stamina_request, {})
-	
-	event_bus.walk_unlock_request.emit({})
-	cooldown_timer.start(cooldown)
-
-
-func _on_event_bus_velocity_changed(value: Vector2, _kwargs: Dictionary) -> void:
-	velocity = value
+	_is_direction_got = false
+	_input_direction = Vector2.ZERO
+	status.emit(Response.INTERRUPTED, {})

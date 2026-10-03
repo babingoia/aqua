@@ -5,8 +5,8 @@ class_name Response extends Node
 ## COMPLETED: Quando a operação foi concluida com sucesso.
 ## INTERRUPTED: Quando a operação foi parada abruptamente.
 
-const RUNNING: String     = "RUNNING"
-const COMPLETED: String   = "COMPLETED"
-const FAILED: String      = "FAILED"
-const INTERRUPTED: String = "INTERRUPTED"
-const CANCELLED: String   = "CANCELLED"
+const RUNNING: StringName     = "RUNNING"
+const COMPLETED: StringName   = "COMPLETED"
+const FAILED: StringName      = "FAILED"
+const INTERRUPTED: StringName = "INTERRUPTED"
+const CANCELLED: StringName   = "CANCELLED"
